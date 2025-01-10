@@ -4,7 +4,11 @@
 }
 
 body {
+    display: block;
+    align-items: center;
     font-family: 'Manrope', sans-serif;
+    background: rgb(212, 183, 255);
+    background: linear-gradient(90deg, rgba(212, 183, 255, 1) 15%, rgba(255, 255, 255, 1) 68%);
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.8;
@@ -20,12 +24,12 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background: rgb(177, 132, 207);
+    background: rgb(212, 183, 255);
     z-index: 10;
 }
 
 
-#navbar ul{
+#navbar ul {
     display: flex;
     flex-direction: row;
     height: 88%;
@@ -34,17 +38,54 @@ body {
     overflow-x: hidden;
 }
 
-#navbar li{
+#navbar li {
     color: #4d4e53;
     list-style: none;
     position: relative;
     width: 100%;
 }
 
-#navbar a{
+#navbar a {
     display: block;
     padding: 10px 30px;
     color: white;
     text-decoration: none;
     cursor: pointer;
+}
+
+.main-section {
+    display: flex;
+    flex-direction: row;
+    justify-items: flex-start;
+    align-items: center;
+
+}
+
+.text-section {
+    position: relative;
+    left: 10%;
+}
+
+.img-section {
+    position: relative;
+    right: -20%;
+    top: -40%;
+}
+
+
+
+footer {
+    margin-top: 10px;
+    background-color: rgb(91, 173, 177);
+    width: 100%;
+}
+
+.socials {
+    display: inline;
+    padding: 10px;
+}
+
+.socials img {
+    height: 5%;
+    width: 5%;
 }
