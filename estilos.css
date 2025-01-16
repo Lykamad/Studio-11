@@ -1,6 +1,16 @@
+@font-face {
+    font-family: The Seasons;
+    src: url('/fonts/Seasons/Fontspring-DEMO-theseasons-lt.otf');
+}
+
 * {
     margin: 0;
     padding: 0;
+}
+
+h1{
+    font-family: The Seasons, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 80px;
 }
 
 body {
@@ -9,6 +19,7 @@ body {
     font-family: 'Manrope', sans-serif;
     background: rgb(212, 183, 255);
     background: linear-gradient(90deg, rgba(212, 183, 255, 1) 15%, rgba(255, 255, 255, 1) 68%);
+    background-repeat: no-repeat;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.8;
@@ -25,6 +36,7 @@ body {
     left: 0;
     width: 100%;
     background: rgb(212, 183, 255);
+    background: linear-gradient(90deg, rgba(212, 183, 255, 1) 15%, rgba(255, 255, 255, 1) 68%);
     z-index: 10;
 }
 
@@ -56,7 +68,7 @@ body {
 .main-section {
     display: flex;
     flex-direction: row;
-    justify-items: flex-start;
+    justify-items: center;
     align-items: center;
 
 }
@@ -68,6 +80,7 @@ body {
 
 .img-section {
     position: relative;
+    z-index: 2;
     right: -20%;
     top: -40%;
 }
