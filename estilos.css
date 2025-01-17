@@ -11,14 +11,17 @@
 h1{
     font-family: The Seasons, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 80px;
+    font-weight: 300;
+    line-height: 70px;
+    color: #803813;
 }
 
 body {
     display: block;
     align-items: center;
     font-family: 'Manrope', sans-serif;
-    background: rgb(212, 183, 255);
-    background: linear-gradient(90deg, rgba(212, 183, 255, 1) 15%, rgba(255, 255, 255, 1) 68%);
+    background: #fff2eb;
+    background: linear-gradient(90deg, #fff2eb 15%, rgba(255, 255, 255, 1) 68%);
     background-repeat: no-repeat;
     font-size: 1rem;
     font-weight: 400;
@@ -35,8 +38,8 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background: rgb(212, 183, 255);
-    background: linear-gradient(90deg, rgba(212, 183, 255, 1) 15%, rgba(255, 255, 255, 1) 68%);
+    background: #fff2eb;
+    background: linear-gradient(90deg, #fff2eb 15%, rgba(255, 255, 255, 1) 68%);
     z-index: 10;
 }
 
@@ -60,7 +63,7 @@ body {
 #navbar a {
     display: block;
     padding: 10px 30px;
-    color: white;
+    color: black;
     text-decoration: none;
     cursor: pointer;
 }
@@ -80,25 +83,38 @@ body {
 
 .img-section {
     position: relative;
-    z-index: 2;
-    right: -20%;
-    top: -40%;
 }
-
 
 
 footer {
-    margin-top: 10px;
-    background-color: rgb(91, 173, 177);
-    width: 100%;
+    margin-top: 40px;
+    background-color: #2c2c2c; /* Fondo oscuro para mayor elegancia */
+    color: #ffffff; /* Texto en blanco para buen contraste */
+    padding: 40px 0; /* Añadir más espacio en la parte superior e inferior */
+    text-align: center; /* Centrar el contenido del footer */
+    font-family: 'Helvetica', sans-serif; /* Fuente moderna y minimalista */
+}
+
+footer p {
+    margin: 0; /* Elimina márgenes extra de los párrafos */
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    opacity: 0.8; /* Opacidad en el texto para un look más sutil */
 }
 
 .socials {
-    display: inline;
-    padding: 10px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center; /* Alinea las redes sociales en el centro */
+    gap: 15px; /* Espaciado entre los íconos */
 }
 
 .socials img {
-    height: 5%;
-    width: 5%;
+    height: 40px; /* Tamaño controlado y proporcional para íconos */
+    width: 40px; /* Ajusta según tus necesidades */
+    transition: transform 0.3s ease; /* Efecto de transición suave al hacer hover */
+}
+
+.socials img:hover {
+    transform: scale(1.2); /* Efecto hover, agranda un poco los íconos al pasar el ratón */
+    filter: brightness(1.2); /* Ilumina los íconos en hover */
 }
