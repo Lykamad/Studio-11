@@ -6,26 +6,27 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-h1{
+h1 {
     font-family: The Seasons, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 80px;
+    font-size: 70px; /* Tamaño ajustado para mejor escalabilidad */
     font-weight: 300;
-    line-height: 70px;
+    line-height: 1.2;
     color: #803813;
+    margin-bottom: 20px;
 }
 
 body {
-    display: block;
-    align-items: center;
     font-family: 'Manrope', sans-serif;
-    background: #fff2eb;
-    background: linear-gradient(90deg, #fff2eb 15%, rgba(255, 255, 255, 1) 68%);
-    background-repeat: no-repeat;
+    /* background: linear-gradient(90deg, #fff2eb 15%, rgba(255, 255, 255, 1) 68%); */
+    background-color: #fff2eb;
     font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.8;
+    /* line-height: 0.8; */
+    color: #4d4e53;
+    padding: 0;
+    margin: 0;
 }
 
 
@@ -35,29 +36,26 @@ body {
     justify-content: flex-start;
     align-items: center;
     position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
-    background: #fff2eb;
-    background: linear-gradient(90deg, #fff2eb 15%, rgba(255, 255, 255, 1) 68%);
+    /* background: linear-gradient(90deg, #fff2eb 15%, rgba(255, 255, 255, 1) 68%); */
+    background-color: #fff2eb;
     z-index: 10;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); Sombra sutil para definición */
+    justify-content: center; /* Alinea las redes sociales en el centro */
+    gap: 15px; /* Espaciado entre los íconos */
 }
-
 
 #navbar ul {
     display: flex;
     flex-direction: row;
     height: 88%;
-    padding: 20px 0px 20px 0px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    padding: 20px 0;
+    list-style: none;
 }
 
+
 #navbar li {
-    color: #4d4e53;
     list-style: none;
-    position: relative;
-    width: 100%;
 }
 
 #navbar a {
@@ -66,25 +64,40 @@ body {
     color: black;
     text-decoration: none;
     cursor: pointer;
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+#navbar a:hover {
+    color: #803813;
+    transform: scale(1.2); /* Efecto hover, agranda un poco los íconos al pasar el ratón */
+    filter: brightness(1.2); /* Ilumina los íconos en hover */
 }
 
 .main-section {
     display: flex;
     flex-direction: row;
-    justify-items: center;
+    justify-content: space-between;
     align-items: center;
-
+    padding: 100px 10%; /* Espaciado superior para evitar solapamiento con navbar */
+    height: 100vh; /* Altura de pantalla completa */
 }
 
 .text-section {
-    position: relative;
-    left: 10%;
+    flex: 1;
+    margin-right: 5%; /* Añadir espacio entre el texto y la imagen */
 }
 
 .img-section {
-    position: relative;
+    flex: 1;
 }
 
+.img-section img {
+    max-width: 85%; /* Imagen escala con el contenedor */
+    height: auto;
+    padding-top: 30px;
+    border-radius: 10px; /* Bordes redondeados para darle un toque elegante */
+}
 
 footer {
     margin-top: 40px;
