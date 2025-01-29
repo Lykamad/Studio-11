@@ -20,39 +20,30 @@ h1 {
 
 body {
     font-family: 'Manrope', sans-serif;
-    /* background: linear-gradient(90deg, #fff2eb 15%, rgba(255, 255, 255, 1) 68%); */
     background-color: #fff2eb;
     font-size: 1rem;
-    /* line-height: 0.8; */
     color: #4d4e53;
     padding: 0;
     margin: 0;
 }
 
-
-
 #navbar {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     position: fixed;
     width: 100%;
-    /* background: linear-gradient(90deg, #fff2eb 15%, rgba(255, 255, 255, 1) 68%); */
     background-color: #fff2eb;
     z-index: 10;
-    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); Sombra sutil para definición */
-    justify-content: center; /* Alinea las redes sociales en el centro */
-    gap: 15px; /* Espaciado entre los íconos */
+    padding: 10px 20px;
 }
 
 #navbar ul {
     display: flex;
     flex-direction: row;
     height: 88%;
-    padding: 20px 0;
     list-style: none;
 }
-
 
 #navbar li {
     list-style: none;
@@ -70,8 +61,21 @@ body {
 
 #navbar a:hover {
     color: #803813;
-    transform: scale(1.2); /* Efecto hover, agranda un poco los íconos al pasar el ratón */
-    filter: brightness(1.2); /* Ilumina los íconos en hover */
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+.menu-icon {
+    display: none;
+    cursor: pointer;
+}
+
+.menu-icon div {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 5px 0;
+    transition: 0.4s;
 }
 
 .main-section {
@@ -79,13 +83,13 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 100px 10%; /* Espaciado superior para evitar solapamiento con navbar */
-    height: 100vh; /* Altura de pantalla completa */
+    padding: 100px 10%;
+    height: 100vh;
 }
 
 .text-section {
     flex: 1;
-    margin-right: 5%; /* Añadir espacio entre el texto y la imagen */
+    margin-right: 5%;
 }
 
 .img-section {
@@ -93,41 +97,93 @@ body {
 }
 
 .img-section img {
-    max-width: 85%; /* Imagen escala con el contenedor */
+    max-width: 85%;
     height: auto;
     padding-top: 30px;
-    border-radius: 10px; /* Bordes redondeados para darle un toque elegante */
+    border-radius: 10px;
 }
 
 footer {
     margin-top: 40px;
-    background-color: #2c2c2c; /* Fondo oscuro para mayor elegancia */
-    color: #ffffff; /* Texto en blanco para buen contraste */
-    padding: 40px 0; /* Añadir más espacio en la parte superior e inferior */
-    text-align: center; /* Centrar el contenido del footer */
-    font-family: 'Helvetica', sans-serif; /* Fuente moderna y minimalista */
+    background-color: #2c2c2c;
+    color: #ffffff;
+    padding: 40px 0;
+    text-align: center;
+    font-family: 'Helvetica', sans-serif;
 }
 
 footer p {
-    margin: 0; /* Elimina márgenes extra de los párrafos */
-    font-size: 14px; /* Tamaño de fuente más pequeño */
-    opacity: 0.8; /* Opacidad en el texto para un look más sutil */
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.8;
 }
 
 .socials {
     margin-top: 20px;
     display: flex;
-    justify-content: center; /* Alinea las redes sociales en el centro */
-    gap: 15px; /* Espaciado entre los íconos */
+    justify-content: center;
+    gap: 15px;
 }
 
 .socials img {
-    height: 40px; /* Tamaño controlado y proporcional para íconos */
-    width: 40px; /* Ajusta según tus necesidades */
-    transition: transform 0.3s ease; /* Efecto de transición suave al hacer hover */
+    height: 40px;
+    width: 40px;
+    transition: transform 0.3s ease;
 }
 
 .socials img:hover {
-    transform: scale(1.2); /* Efecto hover, agranda un poco los íconos al pasar el ratón */
-    filter: brightness(1.2); /* Ilumina los íconos en hover */
+    transform: scale(1.2);
+    filter: brightness(1.2);
 }
+
+/* Media Queries para la versión móvil */
+@media (max-width: 768px) {
+    #navbar ul {
+        flex-direction: column;
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        width: 100%;
+        height: 100vh;
+        background-color: #fff2eb;
+        transition: 0.5s;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #navbar ul.active {
+        left: 0;
+    }
+
+    #navbar a {
+        padding: 15px;
+        font-size: 1.2rem;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .main-section {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        align-items: center;
+        padding: 100px 10%;
+        height: 100vh;
+    }
+}
+
+/* Animación del icono de menú hamburguesa al abrir */
+.menu-icon.open .bar1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.menu-icon.open .bar2 {
+    opacity: 0;
+}
+
+.menu-icon.open .bar3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
