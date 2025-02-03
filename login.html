@@ -9,11 +9,13 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="estilos.css" />
+    <link rel="stylesheet" href="estilo_login.css" />
     <title>Studio11</title>
   </head>
   <body>
     <header>
+
+      <!-- Logotipo -->
       <nav id="navbar">
         <a class="nav-link" href="index.html">
           <img
@@ -24,50 +26,30 @@
           />
         </a>
 
+        <!-- Icono menú desplegable versionse móvil -->
+
         <div class="menu-icon">
           <div class="bar1"></div>
           <div class="bar2"></div>
           <div class="bar3"></div>
         </div>
 
-        <ul>
-          <li>
-            <a class="nav-link" href="clases.html">Clases</a>
-          </li>
-          <li>
-            <a class="nav-link" href="que_es.html">¿Qué es Studio 11?</a>
-          </li>
-          <li>
-            <a class="nav-link" href="contacto.html">Contacto</a>
-          </li>
-          <li>
-            <button class="button"><a class="login-link" href="login.html">Iniciar Sesion</a>
-					</button>
-          </li>
-        </ul>
-      </nav>
     </header>
 
     <div class="main-section">
-      <div class="text-section">
-        <h1>CONTACTO </h1></br>
-        <p>
-          Para más información o inscripciones...
-        </p>
-      </div>
-      <div class="img-section">
-        <img
-          src="imagenes/taichi.png"
-          alt="pilates aereo"
-          height="900px"
-        />
-      </div>
-    </div>
-    <section>
-      <form>
-        <a href="https://api.whatsapp.com/send/?phone=34629446219&text&type=phone_number&app_absent=0">Más info e inscripciones a través de Whatsapp</a>
+        <h1 id="title">INICIA SESION </h1><br>
+        <p>Si no tienes una cuenta, puedes <a href="register.html">registrarte</a></p>
+
+      <form id="survey-form" method="post">
+        <legend>Datos personales</legend>
+    
+        <label id="name-label">Nombre:</label>
+        <input type="text" id="name" name="nombre" placeholder="Escribe tu nombre" required>
+        <label id="email-label">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Escribe tu email" required>
+        <button class="button" type="submit">Iniciar</button>
       </form>
-    </section>
+    </div>
 
     <footer>
       <div class="socials">
