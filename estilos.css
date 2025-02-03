@@ -87,19 +87,29 @@ body {
     height: 100vh;
 }
 
+.main-section-clases{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -5%;
+}
+
 .text-section {
     flex: 1;
     margin-right: 5%;
 }
 
 .img-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex: 1;
 }
 
 .img-section img {
-    max-width: 85%;
-    height: auto;
-    padding-top: 30px;
+    max-width: 100%;
+    padding-top: 10%;
+    max-height: 90%;
     border-radius: 10px;
 }
 
