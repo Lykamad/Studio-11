@@ -41,8 +41,9 @@
             <a class="nav-link" href="contacto.html">Contacto</a>
           </li>
           <li>
-            <button class="button"><a class="login-link" href="login.html">Iniciar Sesion</a>
-					</button>
+            <button class="button">
+              <a class="login-link" href="login.html">Iniciar Sesion</a>
+            </button>
           </li>
         </ul>
       </nav>
@@ -50,24 +51,39 @@
 
     <div class="main-section">
       <div class="text-section">
-        <h1>CONTACTO </h1></br>
-        <p>
-          Para más información o inscripciones...
-        </p>
+        <h1>CONTACTO</h1>
+        <br />
+        <p>Para más información o inscripciones...</p>
+
+        <form id="survey-form" method="post">
+          <label id="email-label">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Escribe tu email"
+            required
+          /><br />
+          <textarea
+            id="comentario"
+            name="comentario"
+            rows="4"
+            cols="50"
+            placeholder="Deja un mensaje..."
+          >
+          </textarea
+          ><br />
+          <span>O contacta de manera más rápida a través de</span>
+          <a
+            href="https://api.whatsapp.com/send/?phone=34629446219&text&type=phone_number&app_absent=0"
+            >Whatsapp</a
+          >
+        </form>
       </div>
       <div class="img-section">
-        <img
-          src="imagenes/taichi.png"
-          alt="pilates aereo"
-          height="900px"
-        />
+        <img src="imagenes/meditacion.png" alt="meditacion" height="900px" />
       </div>
     </div>
-    <section>
-      <form>
-        <a href="https://api.whatsapp.com/send/?phone=34629446219&text&type=phone_number&app_absent=0">Más info e inscripciones a través de Whatsapp</a>
-      </form>
-    </section>
 
     <footer>
       <div class="socials">
