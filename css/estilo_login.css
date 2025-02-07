@@ -68,10 +68,15 @@ p {
 .main-section {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    margin-top: 5%;
     align-items: center;
     padding: 100px 10%;
     height: 100vh;
+}
+
+.bold{
+    font-weight: 700;
 }
 
 form {

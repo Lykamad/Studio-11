@@ -1,0 +1,2 @@
+export const APIKEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impqd3RmbHhpbGJxanJzZnlxbmZiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgxNDI5MzMsImV4cCI6MjA1MzcxODkzM30.XHReXyjHWMOeG2jPbGpWZMF26J4imgJMI4Bi9EyKp-w"
+export const BASE_URL = "https://jjwtflxilbqjrsfyqnfb.supabase.co"

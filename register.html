@@ -41,15 +41,20 @@
         <p>Y empieza a descubrir tu lado más zen</a></p>
 
       <form id="survey-form" method="post">
-        <legend>Datos personales</legend>
-    
+            
         <label id="name-label">Nombre:</label>
         <input type="text" id="name" name="nombre" placeholder="Escribe tu nombre" required>
+        <label id="surname-label">Apellidos:</label>
+        <input type="text" id="surname" name="surname" placeholder="Escribe tus apellidos" required>
         <label id="email-label">Email:</label>
         <input type="email" id="email" name="email" placeholder="Escribe tu email" required>
         <label id="pwd-label">Contraseña:</label>
         <input type="password" id="password" name="password" placeholder="Escribe una contraseña" required>
+        <label id="phone-label">Telefono:</label>
+        <input type="tel" id="phone" name="phone" placeholder="Escribe tu teléfono" required>
         <button class="button" type="submit">Registrar</button>
+
+        <p>¿Ya tienes una cuenta? <a href="login.html">Inicia Sesión</a></p>
       </form>
     </div>
 
@@ -68,6 +73,7 @@
         /></a>
       </div>
     </footer>
-    <script src="js/toggleMenu.js"></script>
+    <script src="./js/toggleMenu.js"></script>
+    <script type="module" src="js/auth.js"></script>
   </body>
 </html>
