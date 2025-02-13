@@ -67,6 +67,9 @@ async function register() {
   }
 
   const result = await response.json();
+  
+  localStorage.setItem("token", result.access_token);
+  localStorage.setItem("userId", result.user.user_id);
 
   const requestOptions2 = {
     method: "POST",
@@ -89,12 +92,10 @@ async function register() {
   }
 
   const result2 = await response2.json();
-  console.log()
+  console.log(result2);
 
-  localStorage.setItem("token", result.access_token);
-  localStorage.setItem("user_Id", result.user.id);
 
-  window.location.href = "";
+  window.location.href = "/profile.html";
 }
 
 export async function isUserLogged(access_token, userId) {
