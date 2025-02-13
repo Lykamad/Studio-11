@@ -45,7 +45,7 @@ async function login() {
   localStorage.setItem("token", result.access_token);
   localStorage.setItem("userId", result.user.id);
 
-  window.location.href = "/dashboard.html";
+  window.location.href = "/profile.html";
 }
 
 async function register() {
@@ -69,7 +69,7 @@ async function register() {
   const result = await response.json();
   
   localStorage.setItem("token", result.access_token);
-  localStorage.setItem("userId", result.user.user_id);
+  localStorage.setItem("userId", result.user.id);
 
   const requestOptions2 = {
     method: "POST",
