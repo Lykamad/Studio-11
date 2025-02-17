@@ -10,7 +10,7 @@ if (btnLogout) {
   btnLogout.addEventListener("click", logout);
 }
 
-async function getWorkshops() {
+async function getClases() {
   const requestOptions = {
     method: "GET",
     headers: {
@@ -21,7 +21,7 @@ async function getWorkshops() {
   };
 
   const response = await fetch(
-    `${BASE_URL}/rest/v1/workshops_Studio11`,
+    `${BASE_URL}/rest/v1/clases_Studio11`,
     requestOptions
   );
   if (!response.ok) {
@@ -30,11 +30,11 @@ async function getWorkshops() {
   }
 
   const result = await response.json();
-  printWorkshops(result);
+  printClases(result);
 }
 
 // Función para pintar talleres
-function printWorkshops(allWorkshops) {
+function printClases(allClases) {
   const currentUserRol = getRol();
   workshopBox.innerHTML = "";
   buttonContainer.innerHTML = "";
@@ -56,19 +56,19 @@ function printWorkshops(allWorkshops) {
   }
 
   // Recorrer y mostrar talleres
-  allWorkshops.forEach((workshop) => {
+  allClases.forEach((clase) => {
     let btnDelete = "";
     let btnModif = "";
 
     // Si el usuario es ADMIN aparecerán los botoner Eliminar y Modificar
     if (currentUserRol === "ADMIN") {
       btnDelete = `
-        <button data-id="${workshop.id}" class="delete-btn">
+        <button data-id="${clase.id}" class="delete-btn">
           Eliminar
         </button>
       `;
       btnModif = `
-        <button data-id="${workshop.id}" class="modif-btn">
+        <button data-id="${clase.id}" class="modif-btn">
           Modificar
         </button>
       `;
@@ -76,11 +76,11 @@ function printWorkshops(allWorkshops) {
 
     workshopBox.innerHTML += `
       <div class="workshop-content">
-        <h2>${workshop.name}</h2>
-        <p class="description">${workshop.description}</p>
-        <p class="description">Plazas: ${workshop.plazas}</p>
-        <p class="description">Fecha: ${workshop.fecha}</p>
-        <p class="description">Precio: ${workshop.precio}€</p>
+        <h2>${clase.name}</h2>
+        <p class="description">${clase.description}</p>
+        <p class="description">Plazas: ${clase.plazas}</p>
+        <p class="description">Fecha: ${clase.fecha}</p>
+        <p class="description">Precio: ${clase.precio}€</p>
         ${btnDelete} ${btnModif}
         <form></form>
       </div>
@@ -90,24 +90,24 @@ function printWorkshops(allWorkshops) {
   // Evento para eliminar talleres
   const btnsDelete = document.querySelectorAll(".delete-btn");
   btnsDelete.forEach((button) => {
-    const workshopId = button.getAttribute("data-id");
+    const claseId = button.getAttribute("data-id");
     button.addEventListener("click", () => {
-      deleteWorkshop(workshopId);
+      deleteClase(claseId);
     });
   });
 
   // Evento para modificar talleres
   const btnsUpdate = document.querySelectorAll(".modif-btn");
   btnsUpdate.forEach((button) => {
-    const workshopId = button.getAttribute("data-id");
+    const claseId = button.getAttribute("data-id");
     button.addEventListener("click", () => {
-      updateWorkshop(workshopId);
+      updateClase(claseId);
     });
   });
 }
 
 // Función para crear un nuevo taller
-async function createWorkshop() {
+async function createClase() {
   const inputName = document.getElementById("name").value;
   const inputDescription = document.getElementById("description").value;
   const inputPlazas = document.getElementById("plazas").value;
@@ -133,7 +133,7 @@ async function createWorkshop() {
   };
 
   const response = await fetch(
-    `${BASE_URL}/rest/v1/workshops_Studio11`,
+    `${BASE_URL}/rest/v1/clases_Studio11`,
     requestOptions
   );
   if (!response.ok) {
@@ -142,11 +142,11 @@ async function createWorkshop() {
   }
 
   formCreate.classList.add("hidden"); // Ocultar el formulario tras crear el taller
-  getWorkshops(); // Actualizar lista de talleres
+  getClases(); // Actualizar lista de talleres
 }
 
 //Función borrar taller
-async function deleteWorkshop(workshopId) {
+async function deleteClase(claseId) {
   const requestOptions = {
     method: "DELETE",
     headers: {
@@ -157,7 +157,7 @@ async function deleteWorkshop(workshopId) {
   };
 
   const response = await fetch(
-    `${BASE_URL}/rest/v1/workshops_Studio11?id=eq.${workshopId}`,
+    `${BASE_URL}/rest/v1/clases_Studio11?id=eq.${claseId}`,
     requestOptions
   );
   if (!response.ok) {
@@ -165,11 +165,11 @@ async function deleteWorkshop(workshopId) {
     return false;
   }
 
-  getWorkshops();
+  getClases();
 }
 
 //Función modificar taller
-async function updateWorkshop(workshopId) {
+async function updateClase(claseId) {
   const newInputName = document.getElementById("new-name").value;
   const newInputDescription = document.getElementById("new-description").value;
   const newInputPlazas = document.getElementById("new-plazas").value;
@@ -193,7 +193,7 @@ async function updateWorkshop(workshopId) {
   };
 
   const response = await fetch(
-    `${BASE_URL}/rest/v1/workshops_Studio11?id=eq.${workshopId}`,
+    `${BASE_URL}/rest/v1/clases_Studio11?id=eq.${claseId}`,
     requestOptions
   );
   if (!response.ok) {
@@ -201,11 +201,11 @@ async function updateWorkshop(workshopId) {
     return false;
   }
 
-  getWorkshops();
+  getClases();
 }
 
 // Evento para guardar el taller nuevo
 const saveWorkshopBtn = document.getElementById("save-workshop-btn");
-saveWorkshopBtn.addEventListener("click", createWorkshop);
+saveWorkshopBtn.addEventListener("click", createClase);
 
-getWorkshops();
+getClases();

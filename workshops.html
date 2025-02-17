@@ -31,13 +31,16 @@
 
         <ul>
           <li>
-            <a class="nav-link" href="clases.html">Clases</a>
+            <a class="nav-link" href="clases2.html">Clases</a>
           </li>
           <li>
             <a class="nav-link" href="workshops.html">Talleres</a>
           </li>
           <li>
             <a class="nav-link" href="contacto.html">Contacto</a>
+          </li>
+          <li>
+            <a class="nav-link" href="profile.html">Perfil</a>
           </li>
           <li>
             <button id="logout" class="button">
@@ -49,36 +52,47 @@
     </header>
 
     <div class="main-section">
-        <div class="text-section">
-          <h1>TALLERES</h1></br>
-         </div>
+      <div class="text-section">
+        <h1>TALLERES</h1></br>
+      </div>
        
-  
-       <!-- Cajas Talleres -->
-       <div class="workshops-container">
-         <div id="workshop-box">
-        
-         </div>
+      <!-- Botón para crear taller -->
+      <div id="button-container"></div>
+
+      <!-- Formulario para crear taller -->
+      <div id="form-create" class="form-create hidden"> <!-- Añadir hidden aquí -->
+        <div class="form-newtaller">
+        <input type="text" id="name" placeholder="Nombre del taller" required />
+        <textarea id="description" placeholder="Descripción" required></textarea>
+        <input type="number" id="plazas" placeholder="Plazas disponibles" required />
+        <input type="date" id="fecha" placeholder="Fecha" required />
+        <input type="number" id="precio" placeholder="Precio (€)" required />
+        <button id="save-workshop-btn">Guardar Taller</button>
+        </div>
+      </div>
+
+      <!-- Cajas Talleres -->
+      <div class="workshops-container" id="workshops-container">
+        <div id="workshop-box">
+          
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
     <footer>
-        <div class="socials">
-          <a
-            class="social-link"
-            href="https://www.facebook.com/profile.php?id=61565195244509"
-            ><img src="imagenes/facebook.png"
-          /></a>
-  
-          <a
-            class="social-link"
-            href="https://www.instagram.com/studio11pilatesyyoga/"
-            ><img src="imagenes/instagram.png"
-          /></a>
-        </div>
-      </footer>
-      <script src="./js/toggleMenu.js"></script>
-      <script type="module" src="./js/restricted.js"></script>
-      <script type="module" src="./js/workshops.js"></script>
+      <div class="socials">
+        <a class="social-link" href="https://www.facebook.com/profile.php?id=61565195244509">
+          <img src="imagenes/facebook.png"/>
+        </a>
+        <a class="social-link" href="https://www.instagram.com/studio11pilatesyyoga/">
+          <img src="imagenes/instagram.png"/>
+        </a>
+      </div>
+    </footer>
+    <script src="./js/toggleMenu.js"></script>
+    <script type="module" src="./js/restricted.js"></script>
+    <script type="module" src="./js/workshops.js"></script>
   </body>
 </html>
