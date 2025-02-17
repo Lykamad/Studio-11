@@ -44,6 +44,9 @@ async function login() {
 
   localStorage.setItem("token", result.access_token);
   localStorage.setItem("userId", result.user.id);
+ 
+
+  await getUserRol()
 
   window.location.href = "/profile.html";
 }
@@ -71,31 +74,61 @@ async function register() {
   localStorage.setItem("token", result.access_token);
   localStorage.setItem("userId", result.user.id);
 
+
   const requestOptions2 = {
     method: "POST",
     headers: {
       apikey: APIKEY,
       "Content-Type": "application/json",
+      Authorization: `Bearer ${result.access_token}`,
     },
     body: JSON.stringify({
-        user_id: "be79d428-9138-4651-8663-f9ee55571a7e",
+        user_id: result.user.id,
         rol: "USER",
         name: inputName.value,
         surname: inputSurname.value,
         phone: inputPhone.value,
+        email: inputEmail.value,
     })
   };
 
-  const response2 = await fetch(`${BASE_URL}/rest/v1/users_Studio11`, requestOptions2);
+  const response2 = await fetch(`${BASE_URL}/rest/v1/usersstudio`, requestOptions2);
+
+
+  const result2 = await response2.json();
+  localStorage.setItem("userRol", result2.user.rol);
+
   if (!response2.ok) {
     alert("Error en el registro");
   }
+  
 
-  const result2 = await response2.json();
-  console.log(result2);
-
+  await getUserRol()
 
   window.location.href = "/profile.html";
+}
+
+export async function getUserRol() {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      apikey: APIKEY,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  };
+
+  const response = await fetch(`${BASE_URL}/rest/v1/usersstudio?user_id=eq.${getUserId()}`, requestOptions);
+  if (!response.ok) {
+    alert("Error al iniciar sesión");
+    return false;
+  }
+
+  const result = await response.json();
+   
+  const userRol = result[0].rol;
+  localStorage.setItem("userRol", userRol);
+
 }
 
 export async function isUserLogged(access_token, userId) {
@@ -136,4 +169,8 @@ export function getToken() {
 
 export function getUserId() {
   return localStorage.getItem("userId");
+}
+
+export function getRol() {
+  return localStorage.getItem("userRol");
 }

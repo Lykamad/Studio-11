@@ -41,13 +41,16 @@
             <a class="nav-link" href="clases.html">Clases</a>
           </li>
           <li>
+            <a class="nav-link" href="workshops.html">Talleres</a>
+          </li>
+          <li>
             <a class="nav-link" href="que_es.html">¿Qué es Studio 11?</a>
           </li>
           <li>
             <a class="nav-link" href="contacto.html">Contacto</a>
           </li>
           <li>
-            <button class="button"><a class="login-link" href="login.html">Iniciar Sesion</a>
+            <button id="logout" class="button"><a class="logout-link">Cerrar Sesion</a>
 					</button>
           </li>
         </ul>
@@ -56,8 +59,22 @@
 
     <div class="main-section">
       <div class="text-section">
-        <h1>PERFIL DE USUARIO </h1></br>
-       
+        <h1>BIENVENIDO A TU PERFIL<span></span></h1></br>
+       </div>
+        
+       <h2 class="perfil-nombre">Nombre de Usuario</h2>
+       <p class="perfil-email">correo@usuario.com</p>
+     </div>
+
+     <!-- Información adicional y acciones -->
+     <div class="perfil-info">
+       <div class="perfil-detalles">
+         <h3>Detalles del Usuario</h3>
+         <p><strong>Miembro desde:</strong> Enero 2022</p>
+         <p><strong>Clases registradas:</strong> 23 clases</p>
+         <p><strong>Teléfono:</strong> +34 123 456 789</p>
+       </div>
+
     </div>
 
     <footer>
@@ -76,5 +93,6 @@
       </div>
     </footer>
     <script src="./js/toggleMenu.js"></script>
+    <script type="module" src="./js/restricted.js"></script>
   </body>
 </html>
