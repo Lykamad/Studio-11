@@ -91,6 +91,27 @@
         </a>
       </div>
     </footer>
+
+    
+  <div id="edit-modal" class="modal">
+    <div class="modal__content">
+      <h3>Editar Taller</h3>
+
+      <div id="form-create" class="form-create">
+        <div class="form-newtaller">
+          <input id="workshopId" type="hidden" value="" />
+          <input type="text" id="nameEdit" placeholder="Nombre del taller" required />
+          <textarea id="descriptionEdit" placeholder="Descripción" required></textarea>
+          <input type="number" id="plazasEdit" placeholder="Plazas disponibles" required />
+          <input type="date" id="fechaEdit" required />
+          <input type="number" placeholder="Precio del taller" id="precioEdit" required /> 
+          <button id="save-edit">Guardar Taller</button>
+        </div>
+      </div>
+
+      <button id="close-modal" class="modal__close">&times;</button>
+    </div>
+  </div>
     <script src="./js/toggleMenu.js"></script>
     <script type="module" src="./js/restricted.js"></script>
     <script type="module" src="./js/workshops.js"></script>

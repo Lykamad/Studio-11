@@ -1,9 +1,28 @@
 import { APIKEY, BASE_URL } from "./config.js";
 import { logout, getToken, getRol } from "./auth.js";
 
+let allWorkshops = [];
+
 const workshopBox = document.getElementById("workshop-box");
 const buttonContainer = document.getElementById("button-container");
 const formCreate = document.getElementById("form-create");
+
+// Edit modal
+const editModal = document.getElementById("edit-modal");
+if (editModal) {
+  const closeModal = document.getElementById("close-modal");
+  closeModal.addEventListener("click", hideEditModal);
+
+  document.getElementById("save-edit").addEventListener("click", async () => {
+    updateWorkshop();
+  });
+}
+const workshopId = document.getElementById("workshopId");
+const nameEdit = document.getElementById("nameEdit");
+const descriptionEdit = document.getElementById("descriptionEdit");
+const plazasEdit = document.getElementById("plazasEdit");
+const fechaEdit = document.getElementById("fechaEdit");
+const precioEdit = document.getElementById("precioEdit");
 
 const btnLogout = document.getElementById("logout");
 if (btnLogout) {
@@ -30,6 +49,7 @@ async function getWorkshops() {
   }
 
   const result = await response.json();
+  allWorkshops = result;
   printWorkshops(result);
 }
 
@@ -49,7 +69,7 @@ function printWorkshops(allWorkshops) {
   //       </button>
   //     `;
   //   })
-    
+
   // }
 
   // Mostrar botón para crear talleres si es ADMIN
@@ -72,6 +92,7 @@ function printWorkshops(allWorkshops) {
   allWorkshops.forEach((workshop) => {
     let btnDelete = "";
     let btnModif = "";
+    let btnInscribir = "";
 
     // Si el usuario es ADMIN aparecerán los botoner Eliminar y Modificar
     if (currentUserRol === "ADMIN") {
@@ -85,6 +106,12 @@ function printWorkshops(allWorkshops) {
           Modificar
         </button>
       `;
+    } else {
+      btnInscribir = `
+        <button data-id="${workshop.id}" class="inscribir-btn">
+          Incribirse
+        </button>
+      `;
     }
 
     workshopBox.innerHTML += `
@@ -94,8 +121,7 @@ function printWorkshops(allWorkshops) {
         <p class="description">Plazas: ${workshop.plazas}</p>
         <p class="description">Fecha: ${workshop.fecha}</p>
         <p class="description">Precio: ${workshop.precio}€</p>
-        ${btnDelete} ${btnModif}
-        <form></form>
+        ${btnDelete} ${btnModif} ${btnInscribir}
       </div>
     `;
   });
@@ -114,7 +140,7 @@ function printWorkshops(allWorkshops) {
   btnsUpdate.forEach((button) => {
     const workshopId = button.getAttribute("data-id");
     button.addEventListener("click", () => {
-      updateWorkshop(workshopId);
+      showEditModal(workshopId);
     });
   });
 }
@@ -126,7 +152,6 @@ async function createWorkshop() {
   const inputPlazas = document.getElementById("plazas").value;
   const inputFecha = document.getElementById("fecha").value;
   const inputPrecio = document.getElementById("precio").value;
-
 
   const requestOptions = {
     method: "POST",
@@ -180,13 +205,32 @@ async function deleteWorkshop(workshopId) {
   getWorkshops();
 }
 
+function showEditModal(dataId) {
+  editModal.style.display = "flex";
+  const workshop = allWorkshops.find((workshop) => workshop.id == dataId);
+  if(workshop){
+  nameEdit.value = workshop.name;
+  descriptionEdit.value = workshop.description;
+  plazasEdit.value = workshop.plazas;
+  fechaEdit.value = workshop.fecha;
+  precioEdit.value = workshop.precio;
+  workshopId.value = dataId;
+  }
+}
+
+function hideEditModal() {
+  editModal.style.display = "none";
+}
+
 //Función modificar taller
-async function updateWorkshop(workshopId) {
-  const newInputName = document.getElementById("new-name").value;
-  const newInputDescription = document.getElementById("new-description").value;
-  const newInputPlazas = document.getElementById("new-plazas").value;
-  const newInputFecha = document.getElementById("new-fecha").value;
-  const newInputPrecio = document.getElementById("new-precio").value;
+async function updateWorkshop() {
+  const dataUpdate = {
+    name: nameEdit.value,
+    description: descriptionEdit.value,
+    plazas: plazasEdit.value,
+    fecha: fechaEdit.value,
+    precio: precioEdit.value,
+  };
 
   const requestOptions = {
     method: "PATCH",
@@ -195,24 +239,18 @@ async function updateWorkshop(workshopId) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${getToken()}`,
     },
-    body: JSON.stringify({
-      name: newInputName,
-      description: newInputDescription,
-      plazas: newInputPlazas,
-      fecha: newInputFecha,
-      precio: newInputPrecio,
-    }),
+    body: JSON.stringify(dataUpdate),
   };
 
   const response = await fetch(
-    `${BASE_URL}/rest/v1/workshops_Studio11?id=eq.${workshopId}`,
+    `${BASE_URL}/rest/v1/workshops_Studio11?id=eq.${workshopId.value}`,
     requestOptions
   );
   if (!response.ok) {
     alert("Error en la petición UPDATE");
     return false;
   }
-
+  hideEditModal();
   getWorkshops();
 }
 

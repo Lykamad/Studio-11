@@ -146,6 +146,21 @@ body {
     transition: 0.4s;
 }
 
+.text-section{
+    text-align: center;
+    margin-top: 8%;
+}
+
+.form-create{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50vw;
+}
+
+#form-create{
+    max-width: 33vw;
+}
+
 .main-section {
     display: flex;
     flex-wrap: wrap;
@@ -255,7 +270,7 @@ body {
     transition: all 0.14s ease-out;
     width: 100%;
     min-height: 30vh;
-   max-width: 50vw;
+    max-width: 50vw;
     flex-direction: column;
 }
 
@@ -448,6 +463,10 @@ footer p {
 .modal__content {
     border-radius: 4px;
     position: relative;
+    border: 2px solid #333;
+    border-radius: 10px;
+    box-shadow: 3px 3px #333;
+    transition: all 0.14s ease-out;
     width: 500px;
     max-width: 90%;
     background: #fff;
@@ -471,7 +490,8 @@ footer p {
     top: 14px;
     right: 14px;
     font-size: 24px;
-    color: #585858;
+    color: #d77d7d;
+    transition: all 0.14s ease-out;
     background-color: transparent;
     border: none;
     text-decoration: none;

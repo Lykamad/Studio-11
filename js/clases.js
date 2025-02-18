@@ -8,21 +8,19 @@ const buttonContainer = document.getElementById("button-container");
 const formCreate = document.getElementById("form-create");
 
 // Edit modal
-const editModal = document.getElementById("edit-modal");  
-if(editModal) {
+const editModal = document.getElementById("edit-modal");
+if (editModal) {
   const closeModal = document.getElementById("close-modal");
   closeModal.addEventListener("click", hideEditModal);
 
   document.getElementById("save-edit").addEventListener("click", async () => {
-    updateClase()
+    updateClase();
   });
 }
 const claseId = document.getElementById("claseId");
 const nameEdit = document.getElementById("nameEdit");
 const descriptionEdit = document.getElementById("descriptionEdit");
 const plazasEdit = document.getElementById("plazasEdit");
-const fechaEdit = document.getElementById("fechaEdit");
-// -- 
 
 const btnLogout = document.getElementById("logout");
 if (btnLogout) {
@@ -101,7 +99,6 @@ function printClases(allClases) {
         <p class="description">Plazas: ${clase.plazas}</p>
         <p class="description">Fecha: ${clase.fecha}</p>
         ${btnDelete} ${btnModif}
-        <form></form>
       </div>
     `;
   });
@@ -120,8 +117,6 @@ function printClases(allClases) {
   btnsUpdate.forEach((button) => {
     const claseId = button.getAttribute("data-id");
     button.addEventListener("click", () => {
-      // updateClase(claseId);
-
       showEditModal(claseId);
     });
   });
@@ -133,7 +128,6 @@ async function createClase() {
   const inputDescription = document.getElementById("description").value;
   const inputPlazas = document.getElementById("plazas").value;
   const inputFecha = document.getElementById("fecha").value;
-  // const newWorkshop = readNewInputs();
 
   const requestOptions = {
     method: "POST",
@@ -186,10 +180,9 @@ async function deleteClase(claseId) {
   getClases();
 }
 
-
 function showEditModal(dataId) {
   editModal.style.display = "flex";
-  const clase = allClases.find(clase => clase.id == dataId);
+  const clase = allClases.find((clase) => clase.id == dataId);
   nameEdit.value = clase.name;
   descriptionEdit.value = clase.description;
   plazasEdit.value = clase.plazas;
