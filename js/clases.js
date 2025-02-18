@@ -12,7 +12,12 @@ const editModal = document.getElementById("edit-modal");
 if(editModal) {
   const closeModal = document.getElementById("close-modal");
   closeModal.addEventListener("click", hideEditModal);
+
+  document.getElementById("save-edit").addEventListener("click", async () => {
+    updateClase()
+  });
 }
+const claseId = document.getElementById("claseId");
 const nameEdit = document.getElementById("nameEdit");
 const descriptionEdit = document.getElementById("descriptionEdit");
 const plazasEdit = document.getElementById("plazasEdit");
@@ -188,16 +193,7 @@ function showEditModal(dataId) {
   nameEdit.value = clase.name;
   descriptionEdit.value = clase.description;
   plazasEdit.value = clase.plazas;
-
-  document.getElementById("save-edit").addEventListener("click", async () => {
-    await updateClase(dataId, {
-      name: nameEdit.value,
-      description: descriptionEdit.value,
-      plazas: plazasEdit.value,
-    });
-
-    hideEditModal();
-  });
+  claseId.value = dataId;
 }
 
 function hideEditModal() {
@@ -205,7 +201,13 @@ function hideEditModal() {
 }
 
 //Función modificar taller
-async function updateClase(claseId, dataUpdate) {
+async function updateClase() {
+  const dataUpdate = {
+    name: nameEdit.value,
+    description: descriptionEdit.value,
+    plazas: plazasEdit.value,
+  };
+
   const requestOptions = {
     method: "PATCH",
     headers: {
@@ -217,7 +219,7 @@ async function updateClase(claseId, dataUpdate) {
   };
 
   const response = await fetch(
-    `${BASE_URL}/rest/v1/clases_Studio11?id=eq.${claseId}`,
+    `${BASE_URL}/rest/v1/clases_Studio11?id=eq.${claseId.value}`,
     requestOptions
   );
   if (!response.ok) {
@@ -225,6 +227,7 @@ async function updateClase(claseId, dataUpdate) {
     return false;
   }
 
+  hideEditModal();
   getClases();
 }
 
