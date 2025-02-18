@@ -39,6 +39,19 @@ function printWorkshops(allWorkshops) {
   workshopBox.innerHTML = "";
   buttonContainer.innerHTML = "";
 
+  // if(currentUserRol === "USER" || "ALUMNO"){
+  //   allWorkshops.forEach((workshop) => {
+  //     let btnInscribir = "";
+
+  //     btnInscribir = `
+  //       <button data-id="${workshop.id}" class="inscription-btn">
+  //         Inscríbete
+  //       </button>
+  //     `;
+  //   })
+    
+  // }
+
   // Mostrar botón para crear talleres si es ADMIN
   if (currentUserRol === "ADMIN") {
     const btnFormCreate = `
@@ -114,7 +127,6 @@ async function createWorkshop() {
   const inputFecha = document.getElementById("fecha").value;
   const inputPrecio = document.getElementById("precio").value;
 
-  const newWorkshop = readNewInputs();
 
   const requestOptions = {
     method: "POST",

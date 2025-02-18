@@ -43,7 +43,7 @@ function printClases(allClases) {
   if (currentUserRol === "ADMIN") {
     const btnFormCreate = `
       <button class="form-create-btn" id="btn-form-create">
-        Crear Nuevo Taller
+        Crear Nueva Clase
       </button>
     `;
     buttonContainer.innerHTML = btnFormCreate;
@@ -80,7 +80,6 @@ function printClases(allClases) {
         <p class="description">${clase.description}</p>
         <p class="description">Plazas: ${clase.plazas}</p>
         <p class="description">Fecha: ${clase.fecha}</p>
-        <p class="description">Precio: ${clase.precio}€</p>
         ${btnDelete} ${btnModif}
         <form></form>
       </div>
@@ -112,9 +111,7 @@ async function createClase() {
   const inputDescription = document.getElementById("description").value;
   const inputPlazas = document.getElementById("plazas").value;
   const inputFecha = document.getElementById("fecha").value;
-  const inputPrecio = document.getElementById("precio").value;
-
-  const newWorkshop = readNewInputs();
+  // const newWorkshop = readNewInputs();
 
   const requestOptions = {
     method: "POST",
@@ -128,7 +125,6 @@ async function createClase() {
       description: inputDescription,
       plazas: inputPlazas,
       fecha: inputFecha,
-      precio: inputPrecio,
     }),
   };
 

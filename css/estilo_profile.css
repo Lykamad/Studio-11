@@ -6,7 +6,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing:content-box;
+    box-sizing: border-box;
 }
 
 h1 {
@@ -16,18 +16,14 @@ h1 {
     font-weight: 300;
     line-height: 1.2;
     color: #803813;
-    margin-bottom: 5px;
-}
-
-h2{
-    font-family: The Seasons, sans-serif;
-    font-weight: 700;
-    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 body {
     font-family: 'Manrope', sans-serif;
     background-color: #fff2eb;
+    font-size: 1rem;
+    color: #4d4e53;
     padding: 0;
     margin: 0;
 }
@@ -41,9 +37,7 @@ body {
     width: 100%;
     background-color: #fff2eb;
     z-index: 10;
-    padding: 10px 5px;
-    margin: auto 0.5em;
-    min-height: 10vh;
+    padding: 10px 20px;
 }
 
 #navbar ul {
@@ -148,160 +142,45 @@ body {
 
 .main-section {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
-    overflow: hidden;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 120px 3%;
+    padding: 100px 10%;
+    height: 100vh;
 }
 
-
-.workshops-container{
-    position: relative;
-    flex: 1;
-    width: auto;
-    height: auto;
-    justify-content: center;
-    align-content: center;
-}
-
-#workshop-box{
-  width: 80vw;
-  flex-wrap: wrap;
-  overflow: hidden;
-}
-
-.workshop-content{
-    margin-bottom: 30px;
-    border: 2px solid #333;
-    border-radius: 10px;
-    padding: 15px;
-
-}
-
-#workshop-box button{
-    font-family: Manrope, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 500;
-    padding: 15px;
-    margin: 16px 2px;
-    border: 2px solid #333;
-    border-radius: 10px;
-    box-shadow: 3px 3px #333;
-    transition: all 0.14s ease-out;
-    min-width: 2em;
-    min-height: 20px;
-    margin-bottom: 30px;
-}
-
-#workshop-box button:hover {
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    box-shadow: none;
-    transform: translate(0.25rem, 0.25rem);
-  }
-
-.delete-btn{
-    background-color: rgb(227, 83, 83);
-    color: white;
-    
-}
-
-.modif-btn{
-    background-color: rgb(83, 227, 117);
-    color: white;
-}
-
-#button-container{
-    position: relative;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-#button-container button{
-    font-family: Manrope, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 500;
-    padding: 15px;
-    margin: 16px 2px;
-    border: 2px solid #333;
-    border-radius: 10px;
-    box-shadow: 3px 3px #333;
-    transition: all 0.14s ease-out;
-    min-width: 1em;
-    min-height: 15px;
-    margin-bottom: 30px;
-}
-
-#button-container button:hover {
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    box-shadow: none;
-    transform: translate(0.25rem, 0.25rem);
-  }
-
-
-.form-create-btn{
-    background-color: rgb(225, 131, 151);
-    color: white;
-    
-}
-
-.hidden{
-    display: none;
-}
-
-.form-newtaller{
+.main-section-clases {
     display: flex;
-    transition: all 0.14s ease-out;
-    width: 50vw;
-    min-height: 30vh;
-    margin: 2em;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: -5%;
 }
 
-.form-newtaller input, textarea{
-    font-family: Manrope, 'Open Sans', 'Helvetica Neue', sans-serif;
-    padding: 15px;
-    margin: 10px 2px;
-    border: 2px solid #333;
+.text-section {
+    flex: 1;
+    margin-right: 5%;
+}
+
+.img-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.img-section img {
+    max-width: 100%;
+    padding-top: 10%;
+    max-height: 90%;
     border-radius: 10px;
-    box-shadow: 3px 3px #333;
-    transition: all 0.14s ease-out;
-    min-width: 1em;
-    max-width: 50vw;
-    min-height: 15px;
-    margin-bottom: 5px;
 }
-
-.form-newtaller button {
-    font-family: Manrope, 'Open Sans', 'Helvetica Neue', sans-serif;
-    padding: 15px;
-    margin: 16px 2px;
-    color: white;
-    background-color: rgb(124, 127, 211);
-    border: 2px solid #333;
-    border-radius: 10px;
-    box-shadow: 3px 3px #333;
-    transition: all 0.14s ease-out;
-    min-width: 1em;
-    max-width: 10em;
-    min-height: 15px;
-    margin-bottom: 30px;
-}
-
-.form-newtaller button:hover {
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    box-shadow: none;
-    transform: translate(0.25rem, 0.25rem);
-  }
-
-
-
 
 footer {
     margin-top: 40px;
     background-color: #2c2c2c;
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
     color: #ffffff;
     padding: 40px 0;
     text-align: center;
@@ -334,19 +213,6 @@ footer p {
 
 /* Media Queries para la versión móvil */
 @media (max-width: 768px) {
-
-    #navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background-color: #fff2eb;
-        z-index: 10;
-        min-height: 10vh;
-    }
-
     #navbar ul {
         flex-direction: column;
         position: fixed;
@@ -373,27 +239,14 @@ footer p {
         display: block;
     }
 
-    h1{
-        font-size: 30px;
+    .main-section {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        align-items: center;
+        padding: 100px 10%;
+        height: 100vh;
     }
-
-    h2{
-        font-size: 20px;
-    }
-
-    p{
-        font-size: 15px;
-    }
-
-    #workshop-box button{
-        padding: 10px;
-        margin: 5px 1px;
-        border-radius: 10px;
-        box-shadow: 3px 3px #333;
-        transition: all 0.14s ease-out;
-    
-    }
-
 }
 
 /* Animación del icono de menú hamburguesa al abrir */

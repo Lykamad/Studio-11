@@ -57,6 +57,20 @@
          </div>
        
        <!-- ESTA PAGINA ES SOLO PARA USUARIOS REGISTRADOS -->
+
+       <!-- Botón para crear clase -->
+      <div id="button-container"></div>
+
+      <!-- Formulario para crear clase -->
+      <div id="form-create" class="form-create hidden"> <!-- Añadir hidden aquí -->
+        <div class="form-newtaller">
+        <input type="text" id="name" placeholder="Nombre de la clase" required />
+        <textarea id="description" placeholder="Descripción" required></textarea>
+        <input type="number" id="plazas" placeholder="Plazas disponibles" required />
+        <input type="date" id="fecha" placeholder="Fecha" required />
+        <button id="save-workshop-btn">Guardar Clase</button>
+        </div>
+      </div>
        <!-- Cajas Talleres -->
        <div class="workshops-container">
          <div id="workshop-box">

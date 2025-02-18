@@ -105,7 +105,7 @@ async function register() {
 
   await getUserRol()
 
-  window.location.href = "/profile.html";
+  window.location.href = "./profile.html";
 }
 
 export async function getUserRol() {
