@@ -1,9 +1,23 @@
 import { APIKEY, BASE_URL } from "./config.js";
 import { logout, getToken, getRol } from "./auth.js";
 
+let allClases = [];
+
 const workshopBox = document.getElementById("workshop-box");
 const buttonContainer = document.getElementById("button-container");
 const formCreate = document.getElementById("form-create");
+
+// Edit modal
+const editModal = document.getElementById("edit-modal");  
+if(editModal) {
+  const closeModal = document.getElementById("close-modal");
+  closeModal.addEventListener("click", hideEditModal);
+}
+const nameEdit = document.getElementById("nameEdit");
+const descriptionEdit = document.getElementById("descriptionEdit");
+const plazasEdit = document.getElementById("plazasEdit");
+const fechaEdit = document.getElementById("fechaEdit");
+// -- 
 
 const btnLogout = document.getElementById("logout");
 if (btnLogout) {
@@ -30,6 +44,7 @@ async function getClases() {
   }
 
   const result = await response.json();
+  allClases = result;
   printClases(result);
 }
 
@@ -100,7 +115,9 @@ function printClases(allClases) {
   btnsUpdate.forEach((button) => {
     const claseId = button.getAttribute("data-id");
     button.addEventListener("click", () => {
-      updateClase(claseId);
+      // updateClase(claseId);
+
+      showEditModal(claseId);
     });
   });
 }
@@ -164,14 +181,31 @@ async function deleteClase(claseId) {
   getClases();
 }
 
-//Función modificar taller
-async function updateClase(claseId) {
-  const newInputName = document.getElementById("new-name").value;
-  const newInputDescription = document.getElementById("new-description").value;
-  const newInputPlazas = document.getElementById("new-plazas").value;
-  const newInputFecha = document.getElementById("new-fecha").value;
-  const newInputPrecio = document.getElementById("new-precio").value;
 
+function showEditModal(dataId) {
+  editModal.style.display = "flex";
+  const clase = allClases.find(clase => clase.id == dataId);
+  nameEdit.value = clase.name;
+  descriptionEdit.value = clase.description;
+  plazasEdit.value = clase.plazas;
+
+  document.getElementById("save-edit").addEventListener("click", async () => {
+    await updateClase(dataId, {
+      name: nameEdit.value,
+      description: descriptionEdit.value,
+      plazas: plazasEdit.value,
+    });
+
+    hideEditModal();
+  });
+}
+
+function hideEditModal() {
+  editModal.style.display = "none";
+}
+
+//Función modificar taller
+async function updateClase(claseId, dataUpdate) {
   const requestOptions = {
     method: "PATCH",
     headers: {
@@ -179,13 +213,7 @@ async function updateClase(claseId) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${getToken()}`,
     },
-    body: JSON.stringify({
-      name: newInputName,
-      description: newInputDescription,
-      plazas: newInputPlazas,
-      fecha: newInputFecha,
-      precio: newInputPrecio,
-    }),
+    body: JSON.stringify(dataUpdate),
   };
 
   const response = await fetch(
