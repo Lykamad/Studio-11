@@ -1,6 +1,6 @@
 import { APIKEY, BASE_URL } from "./config.js";
 import { logout, getToken, getRol } from "./auth.js";
-import { formatearFecha } from "./utils.js";
+import { formatDateTime, formatearFecha } from "./utils.js";
 
 let allWorkshops = [];
 
@@ -41,7 +41,7 @@ async function getWorkshops() {
   };
 
   const response = await fetch(
-    `${BASE_URL}/rest/v1/workshops_Studio11`,
+    `${BASE_URL}/rest/v1/workshops_Studio11?order=fecha`,
     requestOptions
   );
   if (!response.ok) {
@@ -213,8 +213,7 @@ function showEditModal(dataId) {
   nameEdit.value = workshop.name;
   descriptionEdit.value = workshop.description;
   plazasEdit.value = workshop.plazas;
-  // fechaEdit.value = formatearFecha(workshop.fecha);
-  fechaEdit.value = "2025/02/20"
+  fechaEdit.value = formatDateTime(workshop.fecha);
   precioEdit.value = workshop.precio;
   workshopId.value = dataId;
   }
