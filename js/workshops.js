@@ -1,5 +1,6 @@
 import { APIKEY, BASE_URL } from "./config.js";
 import { logout, getToken, getRol } from "./auth.js";
+import { formatearFecha } from "./utils.js";
 
 let allWorkshops = [];
 
@@ -212,7 +213,8 @@ function showEditModal(dataId) {
   nameEdit.value = workshop.name;
   descriptionEdit.value = workshop.description;
   plazasEdit.value = workshop.plazas;
-  fechaEdit.value = workshop.fecha;
+  // fechaEdit.value = formatearFecha(workshop.fecha);
+  fechaEdit.value = "2025/02/20"
   precioEdit.value = workshop.precio;
   workshopId.value = dataId;
   }

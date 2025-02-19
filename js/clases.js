@@ -77,6 +77,7 @@ function printClases(allClases) {
   allClases.forEach((clase) => {
     let btnDelete = "";
     let btnModif = "";
+    let btnInscribir = "";
 
     // Si el usuario es ADMIN aparecerán los botoner Eliminar y Modificar
     if (currentUserRol === "ADMIN") {
@@ -90,6 +91,12 @@ function printClases(allClases) {
           Modificar
         </button>
       `;
+    } else {
+      btnInscribir = `
+        <button data-id="${clase.id}" class="inscribir-btn">
+          Incribirse
+        </button>
+      `;
     }
 
     workshopBox.innerHTML += `
@@ -98,7 +105,7 @@ function printClases(allClases) {
         <p class="description">${clase.description}</p>
         <p class="description">Plazas: ${clase.plazas}</p>
         <p class="description">Fecha: ${clase.fecha}</p>
-        ${btnDelete} ${btnModif}
+        ${btnDelete} ${btnModif} ${btnInscribir}
       </div>
     `;
   });
