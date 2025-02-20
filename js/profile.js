@@ -1,5 +1,5 @@
 
-import { logout, getToken, getRol, getUserId } from "./auth.js";
+import { logout, getToken, getRol, getUserId, getUserEmail } from "./auth.js";
 import { APIKEY, BASE_URL } from "./config.js";
 
 const btnLogout = document.getElementById("logout");
@@ -8,14 +8,19 @@ if (btnLogout) {
 }
 
 const currentUserRol = getRol();
+const currentUserEmail = getUserEmail();
 
 if (currentUserRol === "ADMIN"){
     const container = document.getElementById("perfil-rol");
-    container.innerHTML = `<h2>Ha iniciado como ${currentUserRol}</h2>`
+    container.innerHTML = `<h3>Ha iniciado sesión como ${currentUserRol}</h3>`
 } else {
     const container = document.getElementById("perfil-rol");
-    container.innerHTML = `<h2>Ha iniciado como ${currentUserRol}</h2>`
+    container.innerHTML = `<h3>Ha iniciado sesión como ${currentUserRol}</h3><br>
+    <p>Estado de sus inscipciones:</p>
+    `
     await getStatusInscripcion();
+    const email = document.getElementById("current-email");
+    email.innerHTML = `<p>Su email actual es: ${currentUserEmail}</p>`
 }
 
 
@@ -46,10 +51,10 @@ async function getStatusInscripcion() {
     const inscripciones = document.getElementById("inscripciones");
 
     if (userInfo.taichi_status) {
-      inscripciones.innerHTML += `<li>Tai Chi (${userInfo.taichi_status == "PENDING" ? "Pendiente de aprobación" : "Inscripcion Activa"})</li>`
+      inscripciones.innerHTML += `<li><span class="bold">Tai Chi</span> (${userInfo.taichi_status == "PENDING" ? "Pendiente de aprobación" : "Inscripcion Activa"})</li>`
     }
     if (userInfo.pilates_status) {
-      inscripciones.innerHTML += `<li>Pilates (${userInfo.pilates_status == "PENDING" ? "Pendiente de aprobación" : "Inscripcion Activa"})</li>`
+      inscripciones.innerHTML += `<li><span class="bold">Pilates</span> (${userInfo.pilates_status == "PENDING" ? "Pendiente de aprobación" : "Inscripcion Activa"})</li>`
     }
     console.log("userStatusInscripcion", result[0])
     

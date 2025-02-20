@@ -32,6 +32,10 @@ body {
     margin: 0;
 }
 
+.bold{
+    font-weight: 600;
+}
+
 #navbar {
     display: flex;
     justify-content: space-between;
@@ -151,15 +155,7 @@ body {
     margin-top: 8%;
 }
 
-.form-create{
-    margin-left: auto;
-    margin-right: auto;
-    width: 50vw;
-}
 
-#form-create{
-    max-width: 33vw;
-}
 
 .main-section {
     display: flex;
@@ -219,7 +215,6 @@ body {
 .delete-btn {
     background-color: rgb(227, 83, 83);
     color: white;
-
 }
 
 .modif-btn {
@@ -234,6 +229,11 @@ body {
 
 .inscribir2-btn{
     background-color: #bc77cd;
+    color: white;
+}
+
+.cancel-btn{
+    background-color: rgb(227, 83, 83);
     color: white;
 }
 

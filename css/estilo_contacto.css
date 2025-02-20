@@ -41,9 +41,7 @@ body {
     width: 100%;
     background-color: #fff2eb;
     z-index: 10;
-    padding: 10px 5px;
-    margin: auto 0.5em;
-    min-height: 10vh;
+    padding: 10px 20px;
 }
 
 #navbar ul {

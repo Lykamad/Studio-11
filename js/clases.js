@@ -32,6 +32,17 @@ if (groupModal) {
 
 };
 
+// Cancel modal
+const cancelModal = document.getElementById("cancel-modal");
+if (cancelModal) {
+  const closeModal = document.getElementById("close-modal3");
+  closeModal.addEventListener("click", hideCancelModal);
+
+  const cancelGroupsBtn = document.getElementById("cancel-group");
+  cancelGroupsBtn.addEventListener("click", cancelInscription);
+
+};
+
 const claseId = document.getElementById("claseId");
 const nameEdit = document.getElementById("nameEdit");
 const descriptionEdit = document.getElementById("descriptionEdit");
@@ -131,6 +142,7 @@ function printClases(allClases) {
     let btnDelete = "";
     let btnModif = "";
     let btnInscribir = "";
+    let btnCancelar = "";
 
     // Si el usuario es ADMIN aparecerán los botones Eliminar y Modificar
     if (currentUserRol === "ADMIN") {
@@ -144,14 +156,14 @@ function printClases(allClases) {
           Modificar
         </button>
       `;
-    } else if (currentUserRol === "ALUMNO") { //Si no se es ADMIN se mostrará el botón Inscribir
+    } else if (currentUserRol === "ALUMNO") { //Si se es ALUMNO se mostrará el botón Inscribir
       btnInscribir = `
         <button data-id="${clase.id}" data-name="${clase.name}" class="inscribir-btn">
           Incribirse
         </button>
       `;
 
-    } else {
+    } else { //Si se es USER se mostrará el botón mas info
       btnInscribir = `
         <button class="inscribir2-btn" type="button">
         <a href="../contacto.html">  Consulta más info de ${clase.name} </a>
@@ -161,18 +173,31 @@ function printClases(allClases) {
 
     let info = ""
     let claseStatusInscripcion = "";
-    console.log("lalala", userStatusInscripcion.taichi_status, clase.name)
+    console.log(userStatusInscripcion.taichi_status, clase.name)
 
-    if (userStatusInscripcion.taichi_status && clase.name == "Tai Chi") {
-      
-      claseStatusInscripcion = userStatusInscripcion.taichi_status == "PENDING" ? "Pendiente de aprobación" : "Inscripcion Activa"
+    if (userStatusInscripcion.taichi_status && clase.name == "Tai Chi") { 
+      btnInscribir = `
+      <button data-id="${clase.id}" data-name="${clase.name}" class="inscribir-btn">
+        Pedir cambio de grupo
+      </button>
+    `;
+      claseStatusInscripcion = userStatusInscripcion.taichi_status == "PENDING" ? "Pendiente de aprobación" : "Inscripción Activa"
     } else if (userStatusInscripcion.pilates_status && clase.name == "Pilates") {
-      claseStatusInscripcion = userStatusInscripcion.pilates_status == "PENDING" ? "Pendiente de aprobación" : "Inscripcion Activa"
+      btnInscribir = `
+      <button data-id="${clase.id}" data-name="${clase.name}" class="inscribir-btn">
+        Pedir cambio de grupo
+      </button>
+    `;
+      claseStatusInscripcion = userStatusInscripcion.pilates_status == "PENDING" ? "Pendiente de aprobación" : "Inscripción Activa"
     }
 
     if (claseStatusInscripcion != "") {
       // Decorarlo como tu quieras
-      info = `<p class="description">Inscripción: ${claseStatusInscripcion}</p>`
+      info = `<p class="description bold">Inscripción: ${claseStatusInscripcion}</p>
+      <button data-id="${clase.id}" data-name="${clase.name}" class="cancel-btn">
+        Cancelar inscripción
+      </button>
+      `
     }
 
     workshopBox.innerHTML += `
@@ -180,7 +205,7 @@ function printClases(allClases) {
         <h2>${clase.name}</h2>
         <p class="description">${clase.description}</p>
         ${info}
-        ${btnDelete} ${btnModif} ${btnInscribir}
+        ${btnDelete} ${btnModif} ${btnInscribir} ${btnCancelar}
       </div>
     `;
   }
@@ -204,7 +229,7 @@ function printClases(allClases) {
   });
 
 
-
+  // Evento para inscribirse a las clases
   const btnsInscribir = document.querySelectorAll(".inscribir-btn");
   btnsInscribir.forEach((button) => {
     const claseId = button.getAttribute("data-id");
@@ -212,6 +237,16 @@ function printClases(allClases) {
     button.addEventListener("click", () => {
       showGroups(claseId);
       printGrupos(claseName);
+    });
+  });
+
+  // Evento para inscribirse a las clases
+  const btnsCancelar = document.querySelectorAll(".cancel-btn");
+  btnsCancelar.forEach((button) => {
+    const claseId = button.getAttribute("data-id");
+    const claseName = button.getAttribute("data-name");
+    button.addEventListener("click", () => {
+      showCancelModal(claseId);
     });
   });
 }
@@ -287,12 +322,20 @@ function hideEditModal() {
   editModal.style.display = "none";
 }
 
-function showGroups(dataId) {
+function showGroups() {
   groupModal.style.display = "flex";
 }
 
 function hideGroupsModal() {
   groupModal.style.display = "none";
+}
+
+function showCancelModal() {
+  cancelModal.style.display = "flex";
+}
+
+function hideCancelModal() {
+  cancelModal.style.display = "none";
 }
 
 //Función modificar clase
@@ -380,6 +423,46 @@ async function inscriptionGroup() {
   alert("Solicitud enviada")
   hideGroupsModal()
 
+}
+
+async function cancelInscription() {
+ 
+
+  if (selectedGroup.categoria === "Pilates") {
+    body = {
+      "pilates": "NULL",
+      "pilates_status": "NULL"
+    }
+  } else if (selectedGroup.categoria === "TaiChi") {
+    body = {
+      "taichi": "NULL",
+      "taichi_status": "NULL"
+    }
+  }
+
+  const requestOptions = {
+    method: "PATCH",
+    headers: {
+      apikey: APIKEY,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+    body: JSON.stringify(body),
+  };
+
+  const response = await fetch(
+    `${BASE_URL}/rest/v1/usersstudio?user_id=eq.${getUserId()}`,
+    requestOptions
+  );
+  if (!response.ok) {
+    alert("Error actualizar user-grupo");
+    return;
+  }
+
+  await getStatusInscripcion();
+  await getClases();
+  alert("Se ha cancelado la inscripción")
+  hideGroupsModal()
 }
 
 

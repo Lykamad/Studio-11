@@ -44,6 +44,9 @@ async function login() {
 
   localStorage.setItem("token", result.access_token);
   localStorage.setItem("userId", result.user.id);
+  localStorage.setItem("userEmail", result.user.email);
+
+  
  
 
   await getUserRol()
@@ -97,6 +100,8 @@ async function register() {
 
   const result2 = await response2.json();
   localStorage.setItem("userRol", result2.user.rol);
+  localStorage.setItem("userEmail", result2.user.email);
+
 
   if (!response2.ok) {
     alert("Error en el registro");
@@ -169,6 +174,10 @@ export function getToken() {
 
 export function getUserId() {
   return localStorage.getItem("userId");
+}
+
+export function getUserEmail() {
+  return localStorage.getItem("email");
 }
 
 export function getRol() {
