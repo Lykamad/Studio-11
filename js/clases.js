@@ -87,6 +87,16 @@ async function getGruposClases() {
   console.log(allGrupos)
 }
 
+function printGrupos(claseName){ 
+  const category = claseName == "Pilates" ? "Pilates" : "TaiChi";
+  const currentGrupos = allGrupos.filter(grupo => grupo.categoria === category);
+  const grupos = document.getElementById("grupos");
+  grupos.innerHTML = "";
+  currentGrupos.forEach((grupo) => {
+    grupos.innerHTML += `<option value="${grupo.id}">${grupo.dias} - ${grupo.hora}</option>`;
+  })
+}
+
 // Función para pintar talleres
 function printClases(allClases) {
   const currentUserRol = getRol();
@@ -129,7 +139,7 @@ function printClases(allClases) {
       `;
     } else if (currentUserRol === "ALUMNO"){ //Si no se es ADMIN se mostrará el botón Inscribir
       btnInscribir = `
-        <button data-id="${clase.id}" class="inscribir-btn">
+        <button data-id="${clase.id}" data-name="${clase.name}" class="inscribir-btn">
           Incribirse
         </button>
       `;
@@ -175,8 +185,10 @@ function printClases(allClases) {
   const btnsInscribir = document.querySelectorAll(".inscribir-btn");
   btnsInscribir.forEach((button) => {
     const claseId = button.getAttribute("data-id");
+    const claseName = button.getAttribute("data-name"); 
     button.addEventListener("click", () => {
       showGroups(claseId);
+      printGrupos(claseName);
     });
   });
 }
