@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/estilo_workshops.css">
+    <title>Talleres</title>
+  </head>
+  <body>
+    <header>
+      <!-- Logotipo -->
+      <nav id="navbar">
+        <a class="nav-link" href="profile.html">
+          <img
+            src="/imagenes/Studio11_negro.png"
+            alt="logo studio11"
+            height="40px"
+            width="120px"
+          />
+        </a>
+
+        <!-- Icono menú desplegable versionse móvil -->
+
+        <div class="menu-icon">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+        </div>
+
+        <!-- Menú apartados -->
+
+        <ul>
+          <li>
+            <a class="nav-link" href="clases2.html">Clases</a>
+          </li>
+          <li>
+            <a class="nav-link" href="workshops.html">Talleres</a>
+          </li>
+          <li>
+            <a class="nav-link" href="contacto.html">Contacto</a>
+          </li>
+          <li>
+            <a class="nav-link" href="profile.html">Perfil</a>
+          </li>
+          <li>
+            <button id="logout" class="button">
+              <a class="logout-link">Cerrar Sesion</a>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="main-section">
+      <div class="text-section">
+        <h1>TALLERES</h1></br>
+      </div>
+       
+      <!-- Botón para crear taller -->
+      <div id="button-container"></div>
+
+      <!-- Formulario para crear taller -->
+      <div id="form-create" class="form-create hidden"> <!-- Añadir hidden aquí -->
+        <div class="form-newtaller">
+        <input type="text" id="name" placeholder="Nombre del taller" required />
+        <textarea id="description" placeholder="Descripción" required></textarea>
+        <input type="number" id="plazas" placeholder="Plazas disponibles" required />
+        <input type="datetime-local" id="fecha" placeholder="Fecha" required />
+        <input type="number" id="precio" placeholder="Precio (€)" required />
+        <button id="save-workshop-btn">Guardar Taller</button>
+        </div>
+      </div>
+
+      <!-- Cajas Talleres -->
+      <div class="workshops-container" id="workshops-container">
+        <div id="workshop-box">
+          
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="socials">
+        <a class="social-link" href="https://www.facebook.com/profile.php?id=61565195244509">
+          <img src="imagenes/facebook.png"/>
+        </a>
+        <a class="social-link" href="https://www.instagram.com/studio11pilatesyyoga/">
+          <img src="imagenes/instagram.png"/>
+        </a>
+      </div>
+    </footer>
+
+    
+  <div id="edit-modal" class="modal">
+    <div class="modal__content">
+      <h3>Editar Taller</h3>
+
+      <div id="form-create" class="form-create">
+        <div class="form-newtaller">
+          <input id="workshopId" type="hidden" value="" />
+          <input type="text" id="nameEdit" placeholder="Nombre del taller" required />
+          <textarea id="descriptionEdit" placeholder="Descripción" required></textarea>
+          <input type="number" id="plazasEdit" placeholder="Plazas disponibles" required />
+          <input type="datetime-local" id="fechaEdit" required />
+          <input type="number" placeholder="Precio del taller" id="precioEdit" required /> 
+          <button id="save-edit">Guardar Taller</button>
+        </div>
+      </div>
+
+      <button id="close-modal" class="modal__close">&times;</button>
+    </div>
+  </div>
+    <script src="./js/toggleMenu.js"></script>
+    <script type="module" src="./js/restricted.js"></script>
+    <script type="module" src="./js/workshops.js"></script>
+
+<!-- Cal element-click embed code begins -->
+<script type="text/javascript">
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+Cal("init", "taller-aeropilates", {origin:"https://cal.com"});
+
+  
+  // Important: Please add the following attributes to the element that should trigger the calendar to open upon clicking.
+  // `data-cal-link="angeles-qbly5o/taller-aeropilates"`
+  // data-cal-namespace="taller-aeropilates"
+  // `data-cal-config='{"layout":"month_view"}'`
+
+  Cal.ns["taller-aeropilates"]("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#292929"},"dark":{"cal-brand":"#f4ceb9"}},"hideEventTypeDetails":false,"layout":"month_view"});
+  </script>
+  <!-- Cal element-click embed code ends -->
+  </body>
+</html>

@@ -9,7 +9,9 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./css/estilos.css" />
+    <link rel="stylesheet" href="./css/estilo_que_es.css" />
+    <link rel="stylesheet" href="./css/estilo_carousel.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <title>Studio11</title>
   </head>
   <body>
@@ -47,24 +49,29 @@
         </ul>
       </nav>
     </header>
-
+   <main>
     <div class="main-section">
-      <div class="text-section">
-        <h1>QUE ES</h1></br>
-        <p>
-          Y aprende con nosotros disciplinas diferentes y divertidas para
-          ejercitarte.
-        </p>
-      </div>
-      <div class="img-section">
-        <img
+      <section class="slideshow-container">
+              
+              <div class="mySlides fade">
+              <img class="swiper-slide"  src="imagenes/foto (1).jpg" alt="Image 1" style="width:100%; max-height:90vh">
+              </div>
+              <div class="mySlides fade">
+              <img class="swiper-slide"  src="imagenes/foto (17).jpg" alt="Image 2" style="width:100%; max-height:90vh">
+            </div>
+              <div class="mySlides fade">
+              <img class="swiper-slide"  src="imagenes/foto (5).jpg" alt="Image 3" style="width:100%; max-height:90vh">
+            </div>
+              <div class="mySlides fade">
+              <img class="swiper-slide"  src="imagenes/foto (25).jpg" alt="Image 4" style="width:100%; max-height:90vh">
+            </div>
           
-          alt="pilates aereo"
-          height="900px"
-        />
-      </div>
-    </div>
-
+     <!-- Next and previous buttons -->
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+</section>
+  </main>
     <footer>
       <div class="socials">
         <a
@@ -81,5 +88,6 @@
       </div>
     </footer>
     <script src="./js/toggleMenu.js"></script>
+    <script src="./js/carousel.js"></script>
   </body>
 </html>
