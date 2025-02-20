@@ -1,9 +1,10 @@
 import { APIKEY, BASE_URL } from "./config.js";
-import { logout, getToken, getRol } from "./auth.js";
+import { logout, getToken, getRol, getUserId } from "./auth.js";
 
 let allClases = [];
 let allGrupos = [];
 
+let userStatusInscripcion;
 
 const workshopBox = document.getElementById("workshop-box");
 const buttonContainer = document.getElementById("button-container");
@@ -26,8 +27,10 @@ if (groupModal) {
   const closeModal = document.getElementById("close-modal2");
   closeModal.addEventListener("click", hideGroupsModal);
 
+  const saveGroupsBtn = document.getElementById("save-group");
+  saveGroupsBtn.addEventListener("click", inscriptionGroup);
 
-  };
+};
 
 const claseId = document.getElementById("claseId");
 const nameEdit = document.getElementById("nameEdit");
@@ -60,7 +63,9 @@ async function getClases() {
 
   const result = await response.json();
   allClases = result;
+
   printClases(result);
+
 }
 
 async function getGruposClases() {
@@ -87,7 +92,7 @@ async function getGruposClases() {
   console.log(allGrupos)
 }
 
-function printGrupos(claseName){ 
+function printGrupos(claseName) {
   const category = claseName == "Pilates" ? "Pilates" : "TaiChi";
   const currentGrupos = allGrupos.filter(grupo => grupo.categoria === category);
   const grupos = document.getElementById("grupos");
@@ -120,7 +125,9 @@ function printClases(allClases) {
   }
 
   // Recorrer y mostrar talleres
-  allClases.forEach((clase) => {
+  for (const clase of allClases) {
+
+
     let btnDelete = "";
     let btnModif = "";
     let btnInscribir = "";
@@ -137,13 +144,13 @@ function printClases(allClases) {
           Modificar
         </button>
       `;
-    } else if (currentUserRol === "ALUMNO"){ //Si no se es ADMIN se mostrará el botón Inscribir
+    } else if (currentUserRol === "ALUMNO") { //Si no se es ADMIN se mostrará el botón Inscribir
       btnInscribir = `
         <button data-id="${clase.id}" data-name="${clase.name}" class="inscribir-btn">
           Incribirse
         </button>
       `;
-      
+
     } else {
       btnInscribir = `
         <button class="inscribir2-btn" type="button">
@@ -152,15 +159,31 @@ function printClases(allClases) {
       `;
     }
 
+    let info = ""
+    let claseStatusInscripcion = "";
+    console.log("lalala", userStatusInscripcion.taichi_status, clase.name)
+
+    if (userStatusInscripcion.taichi_status && clase.name == "Tai Chi") {
+      
+      claseStatusInscripcion = userStatusInscripcion.taichi_status == "PENDING" ? "Pendiente de aprobación" : "Inscripcion Activa"
+    } else if (userStatusInscripcion.pilates_status && clase.name == "Pilates") {
+      claseStatusInscripcion = userStatusInscripcion.pilates_status == "PENDING" ? "Pendiente de aprobación" : "Inscripcion Activa"
+    }
+
+    if (claseStatusInscripcion != "") {
+      // Decorarlo como tu quieras
+      info = `<p class="description">Inscripción: ${claseStatusInscripcion}</p>`
+    }
+
     workshopBox.innerHTML += `
       <div class="workshop-content">
         <h2>${clase.name}</h2>
         <p class="description">${clase.description}</p>
-        <p class="description">Plazas: ${clase.plazas}</p>
+        ${info}
         ${btnDelete} ${btnModif} ${btnInscribir}
       </div>
     `;
-  });
+  }
 
   // Evento para eliminar clases
   const btnsDelete = document.querySelectorAll(".delete-btn");
@@ -185,7 +208,7 @@ function printClases(allClases) {
   const btnsInscribir = document.querySelectorAll(".inscribir-btn");
   btnsInscribir.forEach((button) => {
     const claseId = button.getAttribute("data-id");
-    const claseName = button.getAttribute("data-name"); 
+    const claseName = button.getAttribute("data-name");
     button.addEventListener("click", () => {
       showGroups(claseId);
       printGrupos(claseName);
@@ -264,7 +287,7 @@ function hideEditModal() {
   editModal.style.display = "none";
 }
 
-function showGroups(dataId){
+function showGroups(dataId) {
   groupModal.style.display = "flex";
 }
 
@@ -307,5 +330,87 @@ async function updateClase() {
 const saveWorkshopBtn = document.getElementById("save-workshop-btn");
 saveWorkshopBtn.addEventListener("click", createClase);
 
-getClases();
-getGruposClases();
+// Solicitar acceso a la clase
+
+async function inscriptionGroup() {
+
+  const grupoId = document.getElementById("grupos").value;
+  console.log(grupoId)
+  if (!grupoId) {
+    alert("Selecciona un grupo");
+    return;
+  }
+
+  let body = {}
+  const selectedGroup = allGrupos.find(grupo => grupo.id == grupoId)
+  console.log(selectedGroup)
+  if (selectedGroup.categoria === "Pilates") {
+    body = {
+      "pilates": selectedGroup.id,
+      "pilates_status": "PENDING"
+    }
+  } else if (selectedGroup.categoria === "TaiChi") {
+    body = {
+      "taichi": selectedGroup.id,
+      "taichi_status": "PENDING"
+    }
+  }
+
+  const requestOptions = {
+    method: "PATCH",
+    headers: {
+      apikey: APIKEY,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+    body: JSON.stringify(body),
+  };
+
+  const response = await fetch(
+    `${BASE_URL}/rest/v1/usersstudio?user_id=eq.${getUserId()}`,
+    requestOptions
+  );
+  if (!response.ok) {
+    alert("Error actualizar user-grupo");
+    return;
+  }
+
+  alert("Solicitud enviada")
+  hideGroupsModal()
+}
+
+
+async function getStatusInscripcion() {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      apikey: APIKEY,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  };
+
+  const response = await fetch(
+    `${BASE_URL}/rest/v1/usersstudio?user_id=eq.${getUserId()}`,
+    requestOptions
+  );
+  if (!response.ok) {
+    alert("Error al encontrar los grupos");
+    return;
+  }
+
+  const result = await response.json();
+
+  if (result.length > 0) {
+    userStatusInscripcion = result[0]
+    console.log("userStatusInscripcion", userStatusInscripcion)
+    await getClases();
+  }
+
+}
+
+
+// Primera carga
+await getStatusInscripcion()
+await getClases();
+await getGruposClases();
