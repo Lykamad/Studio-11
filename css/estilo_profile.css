@@ -146,7 +146,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 100px 10%;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .main-section-clases {

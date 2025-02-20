@@ -375,8 +375,11 @@ async function inscriptionGroup() {
     return;
   }
 
+  await getStatusInscripcion();
+  await getClases();
   alert("Solicitud enviada")
   hideGroupsModal()
+
 }
 
 
@@ -404,7 +407,6 @@ async function getStatusInscripcion() {
   if (result.length > 0) {
     userStatusInscripcion = result[0]
     console.log("userStatusInscripcion", userStatusInscripcion)
-    await getClases();
   }
 
 }

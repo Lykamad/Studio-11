@@ -1,5 +1,6 @@
 
-import { logout, getToken, getRol } from "./auth.js";
+import { logout, getToken, getRol, getUserId } from "./auth.js";
+import { APIKEY, BASE_URL } from "./config.js";
 
 const btnLogout = document.getElementById("logout");
 if (btnLogout) {
@@ -9,6 +10,50 @@ if (btnLogout) {
 const currentUserRol = getRol();
 
 if (currentUserRol === "ADMIN"){
-    const container = document.querySelectorAll("perfil-rol");
-    container.innerHTML = `<h2>Ha iniaciado como ${currentUserRol}</h2>`
+    const container = document.getElementById("perfil-rol");
+    container.innerHTML = `<h2>Ha iniciado como ${currentUserRol}</h2>`
+} else {
+    const container = document.getElementById("perfil-rol");
+    container.innerHTML = `<h2>Ha iniciado como ${currentUserRol}</h2>`
+    await getStatusInscripcion();
 }
+
+
+async function getStatusInscripcion() {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      apikey: APIKEY,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  };
+
+  const response = await fetch(
+    `${BASE_URL}/rest/v1/usersstudio?user_id=eq.${getUserId()}`,
+    requestOptions
+  );
+  if (!response.ok) {
+    alert("Error al encontrar los grupos");
+    return;
+  }
+
+  const result = await response.json();
+
+  if (result.length > 0) {
+    const userInfo = result[0]
+
+    const inscripciones = document.getElementById("inscripciones");
+
+    if (userInfo.taichi_status) {
+      inscripciones.innerHTML += `<li>Tai Chi (${userInfo.taichi_status == "PENDING" ? "Pendiente de aprobación" : "Inscripcion Activa"})</li>`
+    }
+    if (userInfo.pilates_status) {
+      inscripciones.innerHTML += `<li>Pilates (${userInfo.pilates_status == "PENDING" ? "Pendiente de aprobación" : "Inscripcion Activa"})</li>`
+    }
+    console.log("userStatusInscripcion", result[0])
+    
+  }
+
+}
+
