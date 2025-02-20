@@ -12,7 +12,7 @@
   <header>
     <!-- Logotipo -->
     <nav id="navbar">
-      <a class="nav-link" href="index.html">
+      <a class="nav-link" href="profile.html">
         <img src="/imagenes/Studio11_negro.png" alt="logo studio11" height="40px" width="120px" />
       </a>
 
@@ -67,7 +67,6 @@
         <input type="text" id="name" placeholder="Nombre de la clase" required />
         <textarea id="description" placeholder="Descripción" required></textarea>
         <input type="number" id="plazas" placeholder="Plazas disponibles" required />
-        <input type="date" id="fecha" placeholder="Fecha" required />
         <button id="save-workshop-btn">Guardar Clase</button>
       </div>
     </div>
@@ -109,6 +108,25 @@
     </div>
   </div>
 
+  <div id="group-modal" class="modal">
+    <div class="modal__content">
+      <h3>Elige tu grupo:</h3>
+
+      <div id="form-create" class="form-create">
+        <div class="form-newtaller">
+          <select name="grupos" id="grupos">
+           <option value="lunes"></option>
+           <option value="martes"></option>
+           <option value="viernes"></option>
+          </select>
+          <button id="save-group">Confirmar Grupo</button>
+        </div>
+      </div>
+
+      <button id="close-modal2" class="modal__close">&times;</button>
+    </div>
+  </div>
+ 
   <script src="./js/toggleMenu.js"></script>
   <script type="module" src="./js/restricted.js"></script>
   <script type="module" src="./js/clases.js"></script>

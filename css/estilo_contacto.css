@@ -147,7 +147,6 @@ body {
 }
 
 .text-section{
-    text-align: center;
     margin-top: 8%;
 }
 
@@ -164,11 +163,10 @@ body {
 .main-section {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
-    overflow: hidden;
+    flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
-    padding: 120px 3%;
+    padding: 0.5% 3%;
 }
 
 
@@ -274,7 +272,7 @@ body {
     flex-direction: column;
 }
 
-.form-newtaller input,
+ input,
 textarea {
     font-family: Manrope, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding: 15px;

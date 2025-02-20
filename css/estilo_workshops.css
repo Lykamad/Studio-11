@@ -227,6 +227,16 @@ body {
     color: white;
 }
 
+.inscribir-btn{
+    background-color: #a6765e;
+    color: white;
+}
+
+.inscribir2-btn{
+    background-color: #bc77cd;
+    color: white;
+}
+
 #button-container {
     position: relative;
     align-items: center;
@@ -275,7 +285,7 @@ body {
 }
 
 .form-newtaller input,
-textarea {
+textarea, select {
     font-family: Manrope, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding: 15px;
     margin: 10px 2px;
@@ -288,6 +298,13 @@ textarea {
     min-height: 15px;
     margin-bottom: 5px;
 }
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+
 
 .form-newtaller button {
     font-family: Manrope, 'Open Sans', 'Helvetica Neue', sans-serif;

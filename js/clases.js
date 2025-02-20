@@ -2,6 +2,8 @@ import { APIKEY, BASE_URL } from "./config.js";
 import { logout, getToken, getRol } from "./auth.js";
 
 let allClases = [];
+let allGrupos = [];
+
 
 const workshopBox = document.getElementById("workshop-box");
 const buttonContainer = document.getElementById("button-container");
@@ -17,6 +19,16 @@ if (editModal) {
     updateClase();
   });
 }
+
+// Group modal
+const groupModal = document.getElementById("group-modal");
+if (groupModal) {
+  const closeModal = document.getElementById("close-modal2");
+  closeModal.addEventListener("click", hideGroupsModal);
+
+
+  };
+
 const claseId = document.getElementById("claseId");
 const nameEdit = document.getElementById("nameEdit");
 const descriptionEdit = document.getElementById("descriptionEdit");
@@ -42,13 +54,37 @@ async function getClases() {
     requestOptions
   );
   if (!response.ok) {
-    alert("Error al encontrar los talleres");
+    alert("Error al encontrar las clases");
     return;
   }
 
   const result = await response.json();
   allClases = result;
   printClases(result);
+}
+
+async function getGruposClases() {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      apikey: APIKEY,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  };
+
+  const response = await fetch(
+    `${BASE_URL}/rest/v1/grupos_Studio11`,
+    requestOptions
+  );
+  if (!response.ok) {
+    alert("Error al encontrar los grupos");
+    return;
+  }
+
+  const result = await response.json();
+  allGrupos = result;
+  console.log(allGrupos)
 }
 
 // Función para pintar talleres
@@ -79,7 +115,7 @@ function printClases(allClases) {
     let btnModif = "";
     let btnInscribir = "";
 
-    // Si el usuario es ADMIN aparecerán los botoner Eliminar y Modificar
+    // Si el usuario es ADMIN aparecerán los botones Eliminar y Modificar
     if (currentUserRol === "ADMIN") {
       btnDelete = `
         <button data-id="${clase.id}" class="delete-btn">
@@ -91,10 +127,17 @@ function printClases(allClases) {
           Modificar
         </button>
       `;
-    } else {
+    } else if (currentUserRol === "ALUMNO"){ //Si no se es ADMIN se mostrará el botón Inscribir
       btnInscribir = `
         <button data-id="${clase.id}" class="inscribir-btn">
           Incribirse
+        </button>
+      `;
+      
+    } else {
+      btnInscribir = `
+        <button class="inscribir2-btn" type="button">
+        <a href="../contacto.html">  Consulta más info de ${clase.name} </a>
         </button>
       `;
     }
@@ -104,13 +147,12 @@ function printClases(allClases) {
         <h2>${clase.name}</h2>
         <p class="description">${clase.description}</p>
         <p class="description">Plazas: ${clase.plazas}</p>
-        <p class="description">Fecha: ${clase.fecha}</p>
         ${btnDelete} ${btnModif} ${btnInscribir}
       </div>
     `;
   });
 
-  // Evento para eliminar talleres
+  // Evento para eliminar clases
   const btnsDelete = document.querySelectorAll(".delete-btn");
   btnsDelete.forEach((button) => {
     const claseId = button.getAttribute("data-id");
@@ -119,7 +161,7 @@ function printClases(allClases) {
     });
   });
 
-  // Evento para modificar talleres
+  // Evento para modificar clases
   const btnsUpdate = document.querySelectorAll(".modif-btn");
   btnsUpdate.forEach((button) => {
     const claseId = button.getAttribute("data-id");
@@ -127,14 +169,23 @@ function printClases(allClases) {
       showEditModal(claseId);
     });
   });
+
+
+
+  const btnsInscribir = document.querySelectorAll(".inscribir-btn");
+  btnsInscribir.forEach((button) => {
+    const claseId = button.getAttribute("data-id");
+    button.addEventListener("click", () => {
+      showGroups(claseId);
+    });
+  });
 }
 
-// Función para crear un nuevo taller
+// Función para crear un nueva clase
 async function createClase() {
   const inputName = document.getElementById("name").value;
   const inputDescription = document.getElementById("description").value;
   const inputPlazas = document.getElementById("plazas").value;
-  const inputFecha = document.getElementById("fecha").value;
 
   const requestOptions = {
     method: "POST",
@@ -147,7 +198,6 @@ async function createClase() {
       name: inputName,
       description: inputDescription,
       plazas: inputPlazas,
-      fecha: inputFecha,
     }),
   };
 
@@ -160,8 +210,8 @@ async function createClase() {
     return false;
   }
 
-  formCreate.classList.add("hidden"); // Ocultar el formulario tras crear el taller
-  getClases(); // Actualizar lista de talleres
+  formCreate.classList.add("hidden"); // Ocultar el formulario tras crear la clase
+  getClases(); // Actualizar lista de clases
 }
 
 //Función borrar taller
@@ -187,6 +237,8 @@ async function deleteClase(claseId) {
   getClases();
 }
 
+
+// Funcion para enseñar el modal cuando modificamos una clase
 function showEditModal(dataId) {
   editModal.style.display = "flex";
   const clase = allClases.find((clase) => clase.id == dataId);
@@ -200,7 +252,15 @@ function hideEditModal() {
   editModal.style.display = "none";
 }
 
-//Función modificar taller
+function showGroups(dataId){
+  groupModal.style.display = "flex";
+}
+
+function hideGroupsModal() {
+  groupModal.style.display = "none";
+}
+
+//Función modificar clase
 async function updateClase() {
   const dataUpdate = {
     name: nameEdit.value,
@@ -231,8 +291,9 @@ async function updateClase() {
   getClases();
 }
 
-// Evento para guardar el taller nuevo
+// Evento para guardar el clase nueva
 const saveWorkshopBtn = document.getElementById("save-workshop-btn");
 saveWorkshopBtn.addEventListener("click", createClase);
 
 getClases();
+getGruposClases();

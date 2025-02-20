@@ -60,19 +60,6 @@ function printWorkshops(allWorkshops) {
   workshopBox.innerHTML = "";
   buttonContainer.innerHTML = "";
 
-  // if(currentUserRol === "USER" || "ALUMNO"){
-  //   allWorkshops.forEach((workshop) => {
-  //     let btnInscribir = "";
-
-  //     btnInscribir = `
-  //       <button data-id="${workshop.id}" class="inscription-btn">
-  //         Inscríbete
-  //       </button>
-  //     `;
-  //   })
-
-  // }
-
   // Mostrar botón para crear talleres si es ADMIN
   if (currentUserRol === "ADMIN") {
     const btnFormCreate = `
@@ -109,7 +96,7 @@ function printWorkshops(allWorkshops) {
       `;
     } else {
       btnInscribir = `
-        <button data-id="${workshop.id}" class="inscribir-btn">
+        <button data-id="${workshop.id}" class="inscribir-btn" data-cal-link="angeles-qbly5o/taller-aeropilates" data-cal-namespace="taller-aeropilates" data-cal-config='{"layout":"month_view"}''>
           Incribirse
         </button>
       `;
@@ -123,6 +110,7 @@ function printWorkshops(allWorkshops) {
         <p class="description">Fecha: ${workshop.fecha}</p>
         <p class="description">Precio: ${workshop.precio}€</p>
         ${btnDelete} ${btnModif} ${btnInscribir}
+        
       </div>
     `;
   });
