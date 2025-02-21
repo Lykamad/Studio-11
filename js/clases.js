@@ -156,7 +156,7 @@ function printClases(allClases) {
           Modificar
         </button>
       `;
-    } else if (currentUserRol === "ALUMNO") { //Si se es ALUMNO se mostrará el botón Inscribir
+    }  if (currentUserRol === "ALUMNO") { //Si se es ALUMNO se mostrará el botón Inscribir
       btnInscribir = `
         <button data-id="${clase.id}" data-name="${clase.name}" class="inscribir-btn">
           Incribirse
