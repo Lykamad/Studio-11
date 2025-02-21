@@ -29,8 +29,7 @@ if (groupModal) {
 
   const saveGroupsBtn = document.getElementById("save-group");
   saveGroupsBtn.addEventListener("click", inscriptionGroup);
-
-};
+}
 
 // Cancel modal
 const cancelModal = document.getElementById("cancel-modal");
@@ -40,8 +39,7 @@ if (cancelModal) {
 
   const cancelGroupsBtn = document.getElementById("cancel-group");
   cancelGroupsBtn.addEventListener("click", cancelInscription);
-
-};
+}
 
 const claseId = document.getElementById("claseId");
 const nameEdit = document.getElementById("nameEdit");
@@ -76,7 +74,6 @@ async function getClases() {
   allClases = result;
 
   printClases(result);
-
 }
 
 async function getGruposClases() {
@@ -100,17 +97,19 @@ async function getGruposClases() {
 
   const result = await response.json();
   allGrupos = result;
-  console.log(allGrupos)
+  console.log(allGrupos);
 }
 
 function printGrupos(claseName) {
   const category = claseName == "Pilates" ? "Pilates" : "TaiChi";
-  const currentGrupos = allGrupos.filter(grupo => grupo.categoria === category);
+  const currentGrupos = allGrupos.filter(
+    (grupo) => grupo.categoria === category
+  );
   const grupos = document.getElementById("grupos");
   grupos.innerHTML = "";
   currentGrupos.forEach((grupo) => {
     grupos.innerHTML += `<option value="${grupo.id}">${grupo.dias} - ${grupo.hora}</option>`;
-  })
+  });
 }
 
 // Función para pintar talleres
@@ -137,8 +136,6 @@ function printClases(allClases) {
 
   // Recorrer y mostrar talleres
   for (const clase of allClases) {
-
-
     let btnDelete = "";
     let btnModif = "";
     let btnInscribir = "";
@@ -156,14 +153,15 @@ function printClases(allClases) {
           Modificar
         </button>
       `;
-    }else  if (currentUserRol === "ALUMNO") { //Si se es ALUMNO se mostrará el botón Inscribir
+    } else if (currentUserRol === "ALUMNO") {
+      //Si se es ALUMNO se mostrará el botón Inscribir
       btnInscribir = `
         <button data-id="${clase.id}" data-name="${clase.name}" class="inscribir-btn">
           Incribirse
         </button>
       `;
-
-    }else if (currentUserRol === "USER"){//Si se es USER se mostrará el botón mas info
+    } else if (currentUserRol === "USER") {
+      //Si se es USER se mostrará el botón mas info
       btnInscribir = `
         <button class="inscribir2-btn" type="button">
         <a href="../contacto.html">  Consulta más info de ${clase.name} </a>
@@ -171,24 +169,33 @@ function printClases(allClases) {
       `;
     }
 
-    let info = ""
+    let info = "";
     let claseStatusInscripcion = "";
-    console.log(userStatusInscripcion.taichi_status, clase.name)
+    console.log(userStatusInscripcion.taichi_status, clase.name);
 
-    if (userStatusInscripcion.taichi_status && clase.name == "Tai Chi") { 
+    if (userStatusInscripcion.taichi_status && clase.name == "Tai Chi") {
       btnInscribir = `
       <button data-id="${clase.id}" data-name="${clase.name}" class="inscribir-btn">
         Pedir cambio de grupo
       </button>
     `;
-      claseStatusInscripcion = userStatusInscripcion.taichi_status == "PENDING" ? "Pendiente de aprobación" : "Inscripción Activa"
-    } else if (userStatusInscripcion.pilates_status && clase.name == "Pilates") {
+      claseStatusInscripcion =
+        userStatusInscripcion.taichi_status == "PENDING"
+          ? "Pendiente de aprobación"
+          : "Inscripción Activa";
+    } else if (
+      userStatusInscripcion.pilates_status &&
+      clase.name == "Pilates"
+    ) {
       btnInscribir = `
       <button data-id="${clase.id}" data-name="${clase.name}" class="inscribir-btn">
         Pedir cambio de grupo
       </button>
     `;
-      claseStatusInscripcion = userStatusInscripcion.pilates_status == "PENDING" ? "Pendiente de aprobación" : "Inscripción Activa"
+      claseStatusInscripcion =
+        userStatusInscripcion.pilates_status == "PENDING"
+          ? "Pendiente de aprobación"
+          : "Inscripción Activa";
     }
 
     if (claseStatusInscripcion != "") {
@@ -197,7 +204,7 @@ function printClases(allClases) {
       <button data-id="${clase.id}" data-name="${clase.name}" class="cancel-btn">
         Cancelar inscripción
       </button>
-      `
+      `;
     }
 
     workshopBox.innerHTML += `
@@ -227,7 +234,6 @@ function printClases(allClases) {
       showEditModal(claseId);
     });
   });
-
 
   // Evento para inscribirse a las clases
   const btnsInscribir = document.querySelectorAll(".inscribir-btn");
@@ -307,7 +313,6 @@ async function deleteClase(claseId) {
   getClases();
 }
 
-
 // Funcion para enseñar el modal cuando modificamos una clase
 function showEditModal(dataId) {
   editModal.style.display = "flex";
@@ -376,27 +381,26 @@ saveWorkshopBtn.addEventListener("click", createClase);
 // Solicitar acceso a la clase
 
 async function inscriptionGroup() {
-
   const grupoId = document.getElementById("grupos").value;
-  console.log(grupoId)
+  console.log(grupoId);
   if (!grupoId) {
     alert("Selecciona un grupo");
     return;
   }
 
-  let body = {}
-  const selectedGroup = allGrupos.find(grupo => grupo.id == grupoId)
-  console.log(selectedGroup)
+  let body = {};
+  const selectedGroup = allGrupos.find((grupo) => grupo.id == grupoId);
+  console.log(selectedGroup);
   if (selectedGroup.categoria === "Pilates") {
     body = {
-      "pilates": selectedGroup.id,
-      "pilates_status": "PENDING"
-    }
+      pilates: selectedGroup.id,
+      pilates_status: "PENDING",
+    };
   } else if (selectedGroup.categoria === "TaiChi") {
     body = {
-      "taichi": selectedGroup.id,
-      "taichi_status": "PENDING"
-    }
+      taichi: selectedGroup.id,
+      taichi_status: "PENDING",
+    };
   }
 
   const requestOptions = {
@@ -420,24 +424,23 @@ async function inscriptionGroup() {
 
   await getStatusInscripcion();
   await getClases();
-  alert("Solicitud enviada")
-  hideGroupsModal()
-
+  alert("Solicitud enviada");
+  hideGroupsModal();
 }
 
 async function cancelInscription() {
- 
-
+  const selectedGroup = allGrupos.find((grupo) => grupo.id == grupoId);
+  console.log(selectedGroup);
   if (selectedGroup.categoria === "Pilates") {
     body = {
-      "pilates": "NULL",
-      "pilates_status": "NULL"
-    }
+      pilates: "NULL",
+      pilates_status: "NULL",
+    };
   } else if (selectedGroup.categoria === "TaiChi") {
     body = {
-      "taichi": "NULL",
-      "taichi_status": "NULL"
-    }
+      taichi: "NULL",
+      taichi_status: "NULL",
+    };
   }
 
   const requestOptions = {
@@ -461,10 +464,9 @@ async function cancelInscription() {
 
   await getStatusInscripcion();
   await getClases();
-  alert("Se ha cancelado la inscripción")
-  hideGroupsModal()
+  alert("Se ha cancelado la inscripción");
+  hideGroupsModal();
 }
-
 
 async function getStatusInscripcion() {
   const requestOptions = {
@@ -488,14 +490,12 @@ async function getStatusInscripcion() {
   const result = await response.json();
 
   if (result.length > 0) {
-    userStatusInscripcion = result[0]
-    console.log("userStatusInscripcion", userStatusInscripcion)
+    userStatusInscripcion = result[0];
+    console.log("userStatusInscripcion", userStatusInscripcion);
   }
-
 }
 
-
 // Primera carga
-await getStatusInscripcion()
+await getStatusInscripcion();
 await getClases();
 await getGruposClases();

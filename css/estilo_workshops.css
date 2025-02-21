@@ -237,6 +237,11 @@ body {
     color: white;
 }
 
+#cancel-group{
+    background-color: rgb(227, 83, 83);
+    color: white;
+}
+
 #button-container {
     position: relative;
     align-items: center;
@@ -467,8 +472,7 @@ footer p {
     justify-content: center;
     background: rgba(77, 77, 77, .7);
     transition: all .4s;
-    min-height: 100%;
-    height: 100vh;
+    min-height: 60px;
     z-index: 999;
 }
 
@@ -512,4 +516,25 @@ footer p {
     background-color: transparent;
     border: none;
     text-decoration: none;
+}
+
+#cancel-group{
+    font-family: Manrope, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    padding: 15px;
+    margin: 16px 2px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    box-shadow: 3px 3px #333;
+    transition: all 0.14s ease-out;
+    min-width: 2em;
+    min-height: 20px;
+    margin-bottom: 30px;
+}
+
+#cancel-group:hover{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    box-shadow: none;
+    transform: translate(0.25rem, 0.25rem);
 }
