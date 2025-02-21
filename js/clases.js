@@ -156,14 +156,14 @@ function printClases(allClases) {
           Modificar
         </button>
       `;
-    }  if (currentUserRol === "ALUMNO") { //Si se es ALUMNO se mostrará el botón Inscribir
+    }else  if (currentUserRol === "ALUMNO") { //Si se es ALUMNO se mostrará el botón Inscribir
       btnInscribir = `
         <button data-id="${clase.id}" data-name="${clase.name}" class="inscribir-btn">
           Incribirse
         </button>
       `;
 
-    } else { //Si se es USER se mostrará el botón mas info
+    }else if (currentUserRol === "USER"){//Si se es USER se mostrará el botón mas info
       btnInscribir = `
         <button class="inscribir2-btn" type="button">
         <a href="../contacto.html">  Consulta más info de ${clase.name} </a>
